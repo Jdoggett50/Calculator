@@ -2,19 +2,33 @@
     background-color: rgb(17, 12, 46);
 } */
 #wrapper {
-	width: 70vw;
-	height: 90vh;
+    margin: auto;
+	width: 30vw;
+	height: 65vh;
 	border: 2px solid red;
 }
 
 .result-container{
-	width: 69.5vw;
-	height: 30vh;
+    height: 25%;
+	box-sizing: border-box;
 	border: 2px solid blue;
 }
-
-.selection {
-	width: 69.5vw;
-	height: 58.5vh;
+.selection-wrapper {
+    display: flex;
+    box-sizing: border-box black;
+    border: 2px solid
+}
+button {
+    box-sizing: border-box;
+    height: 80px;
+    width: 80px;
+}
+.numbers-container {
+    display: flex;
+    flex-wrap: wrap;
 	border: 2px solid green;
+}
+
+.operators {
+    border : 2px solid pink;
 }
