@@ -1,26 +1,47 @@
 //there will be user input - not sure how we will receive it yet
 
-//add 2 numbers
+let num1 = '4'
+let num2 = '20'
+let operator = '+'
+
+function operate (num1, operator, num2) {
+	let result = '';
+	let expression = [num1,operator,num2];
+	if (expression.includes('+')){
+		result = add(parseInt(num1),parseInt(num2));
+	} else if (expression.includes('-')) {
+		result = subtract(num1,num2);
+	} else if (expression.includes('*')) {
+		result = multiply(num1,num2);
+	} else if (expression.includes('/')) {
+		result = divide(num1,num2);
+	} else 
+		result = powered(num1,num2);
+	return result
+}
+
+// initial var is represented by num1
+let tempVar = operate(num1, operator, num2)
+console.log(tempVar)
+console.log(operate(tempVar,operator,num2))
+
 function add (num1, num2) {
     return num1 + num2;
-}   //add(55,3)
+}
 
-//subtract 2 numbers
 function subtract (num1, num2) {
     return num1 - num2;
-}   //subtract(3,2)
+}
 
-//multiply 2 numbers
 function multiply (num1, num2) {
     return num1 * num2;
-}   //multiply(2,3)
+}
 
-//divide 2 numbers
 function divide (num1,num2) {
     return num1 / num2;
-}   //divide(10,2)
+}
 
-//power of
 function powered (num1,num2){
     return num1 ** num2
-}   //powered(4,2)
+}
+

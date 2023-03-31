@@ -1,3 +1,20 @@
-body {
+/* body {
     background-color: rgb(17, 12, 46);
+} */
+#wrapper {
+	width: 70vw;
+	height: 90vh;
+	border: 2px solid red;
+}
+
+.result-container{
+	width: 69.5vw;
+	height: 30vh;
+	border: 2px solid blue;
+}
+
+.selection {
+	width: 69.5vw;
+	height: 58.5vh;
+	border: 2px solid green;
 }
