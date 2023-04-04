@@ -1,4 +1,7 @@
 //there will be user input - not sure how we will receive it yet
+const inputs = document.querySelector('#numbers-container');
+inputs.addEventListener('click', el => el.target.value)
+
 
 let input1 = '4'
 let input2 = '20'
