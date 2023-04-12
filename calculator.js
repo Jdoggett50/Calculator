@@ -1,12 +1,11 @@
-// const selection = document.querySelector('#selection-wrapper');
-// const result = document.querySelector('.result')
-const operators = ['+','-','*','/','=']
-let operator = ''
+const operators = ['+','-','*','/','=','^'];
+let operator = '';
+let input1 = '';
+let input2 = '';
 
 //get variable from operate and store it in a variable
 //btn values are going to be the inputs
 //how can we use evt.target.value to supply multiple numbers in a data type
-
 //handle the case of multiple operators with no input2
 //check if operator is placed before second input, if not, don't evaluate unless its '+''+'
 //if another num value is placed after the completion of an expression, use diffNum as input2 and expression result will be set to input1
@@ -17,8 +16,11 @@ selectionWrapper.addEventListener('click', (evt) => {
 	console.log(checkOperator(input))
 })
 
-function checkNum(input){
-
+function checkInput(input){
+	if(checkOperator(input)){
+		return input = 0;
+	} 
+	return input
 }
 
 //initial result value
@@ -43,7 +45,7 @@ function checkOperator(btnInput) {
 	//check value in array, return true if its there, otherwise, return false
 	for(let i = 0; i < operators.length; i++){
 		if(operators[i] == btnInput){
-			return operator = operators[i]
+			return operator = operators[i];
 		}
 	}
 	return isOperator
