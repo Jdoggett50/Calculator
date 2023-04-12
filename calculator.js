@@ -13,7 +13,13 @@ let input2 = '';
 const selectionWrapper = document.querySelector('#selection-wrapper')
 selectionWrapper.addEventListener('click', (evt) => {
 	let input = evt.target.value;
-	console.log(checkOperator(input))
+	if(!checkOperator(input) && input == 'AC'){
+		console.log(input = '')
+	} else if(!checkOperator(input)){
+		console.log(input)
+		// input = evt.target.value;
+	}
+	input = checkOperator(input)
 })
 
 function checkInput(input){
@@ -45,7 +51,8 @@ function checkOperator(btnInput) {
 	//check value in array, return true if its there, otherwise, return false
 	for(let i = 0; i < operators.length; i++){
 		if(operators[i] == btnInput){
-			return operator = operators[i];
+			operator = operators[i]
+			//return operator = operators[i];
 		}
 	}
 	return isOperator
