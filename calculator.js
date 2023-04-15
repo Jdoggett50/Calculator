@@ -2,26 +2,24 @@ const operators = ['+','-','*','/','=','^'];
 let input1 = '';
 let operator = '';
 let input2 = '';
-
 const selectionWrapper = document.querySelector('#selection-wrapper')
+
 selectionWrapper.addEventListener('click', (evt) => {
-	let btnValue = evt.target.value;
-	console.log(`button clicked is ${numOrOperator(btnValue)}`);
-	console.log('input2 = 3', `operator = ${operator}`);
-	console.log(`result = ${operate(input1,operator,3)}`);
+	console.log(`button clicked is ${updateInputs(evt.target.value)}`);
+	console.log(`input1 = ${input1}`,`operator = ${operator}`, `input2 = ${input2}`);
+	console.log(`result = ${operate(input1,operator,input2)}`);
 })
 
-function numOrOperator(btnValue){
-	if(!checkOperator(btnValue) && btnValue == 'AC'){
-		input1 = '0';
+function updateInputs(btnVal){
+	if(!checkOperator(btnVal) && btnVal == 'AC'){
+		input1 = '';
 		operator = '';
-		//doesn't exist yet
-		input2 = '0'; 
-	} else if(!checkOperator(btnValue)){
-		input1 += btnValue
+		input2 = '';
+	} else if(!checkOperator(btnVal)){
+		input1 += btnVal
 		return input1
-	} else if (checkOperator(btnValue)) {
-		operator += btnValue
+	} else if (checkOperator(btnVal)) {
+		operator += btnVal
 		return operator
 	}
 }
@@ -32,6 +30,9 @@ function numOrOperator(btnValue){
 //> populate result only if '=' after input2
 //> set input1 to be equal to the result of each expression in the case-
 //  of muliple operators after initial expression
+// result should be 0 unless 1 input is placed and submitted.
+// if (input2 != 0) } input2 = btnValue 
+
 
 function operate (num1, operator, num2) {
 	let expression = [num1,operator,num2];
@@ -49,10 +50,10 @@ function operate (num1, operator, num2) {
 }
 
 //returns operator or false
-function checkOperator(btnValue) {
+function checkOperator(btnVal) {
 	let isOperator = false;
 	for(let i = 0; i < operators.length; i++){
-		if(operators[i] == btnValue){
+		if(operators[i] == btnVal){
 			return isOperator = operators[i];
 		}
 	}
