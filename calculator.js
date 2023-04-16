@@ -15,12 +15,16 @@ function updateInputs(btnVal){
 		input1 = '';
 		operator = '';
 		input2 = '';
-	} else if(!checkOperator(btnVal)){
+	} else if(!checkOperator(btnVal) && operator == ''){
 		input1 += btnVal
 		return input1
-	} else if (checkOperator(btnVal)) {
+	} else if (checkOperator(btnVal)){
 		operator += btnVal
 		return operator
+	} else if (input1 != '' && operator != ''){
+		input2 += btnVal
+		console.log(input2)
+		return input2
 	}
 }
 
