@@ -9,30 +9,36 @@ const btns = document.querySelector('#selection-wrapper')
 btns.addEventListener('click', (evt) => {
 	console.log(`button clicked is ${updateInputs(evt.target.value)}`);
 	console.log(`input1 = ${input1}`,`operator = ${operator}`, `input2 = ${input2}`,`evaluator = ${evaluator}`);
-	console.log(`result = ${updateInputs(btnVal)}`);
-	getResult()
+	console.log(`result = ${(getResults(evt.target.value))}`);
 })
 
 function updateInputs(btnVal){
 	if(btnVal == 'AC'){
-		input1 = '0';
+		input1 = '';
 		operator = '';
-		input2 = '0';
+		input2 = '';
 		evaluator = '';
 	} else if(!checkOperator(btnVal) && operator == ''){
 		input1 += btnVal;
 		return input1;
-	} else if (checkOperator(btnVal) && evaluator == ''){
+	} else if (checkOperator(btnVal) && input2 == ''){
 		operator += btnVal;
 		return operator;
-	} else if (input1 != '' && operator != '' && evaluator == ''){
+	} else if (!checkOperator(btnVal) && input1 != '' && operator != ''){
 		input2 += btnVal;
 		return input2;
-	} else if (checkOperator(btnVal) && operator != ''){
-		
-	}
+	} else 
+	return evaluator = btnVal;
 }
 
+function getResults (btnVal){
+	if(checkOperator(btnVal) && operator != '' && evaluator == '='){
+		return result = operate(input1,operator,input2);
+	} else if (checkOperator && evaluator != ''){
+		return input1 = operate(input1,operator,input2)
+	} else
+	return result = 0;
+}
 //> populate result only if '=' after input2
 //> set input1 to be equal to the result of each expression in the case-
 //  of muliple operators after initial expression
