@@ -27,17 +27,27 @@ function updateInputs(btnVal){
 	} else if (!checkOperator(btnVal) && input1 != '' && operator != ''){
 		input2 += btnVal;
 		return input2;
-	} else 
-	return evaluator = btnVal;
+	} //else if (checkOperator && operator != ''){
+		//should change the operator to equal evaluator
+		//operator = evaluator;
+	//} 
+	else 
+		return evaluator = btnVal;
 }
+
+// else if (checkOperator && evaluator != ''){
+// 		operator = evaluator;
+// 		evaluator = '';
+// 		input2 = '';
 
 function getResults (btnVal){
 	if(checkOperator(btnVal) && operator != '' && evaluator == '='){
 		return result = operate(input1,operator,input2);
-	} else if (checkOperator && evaluator != ''){
-		return input1 = operate(input1,operator,input2)
-	} else
-	return result = 0;
+	} 
+		//should update the value of input1 to the result
+	//return input1 = operate(input1,operator,input2)
+	 else
+		return result = 0;
 }
 //> populate result only if '=' after input2
 //> set input1 to be equal to the result of each expression in the case-
@@ -45,7 +55,7 @@ function getResults (btnVal){
 // result should be 0 unless 1 input is placed and submitted.
 // if (input2 != 0) } input2 = btnValue 
 
-
+//maybe refactor with a class?
 function operate (num1, operator, num2) {
 	let expression = [num1,operator,num2];
 	if (expression.includes('+')){
