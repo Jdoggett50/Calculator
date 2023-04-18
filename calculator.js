@@ -31,24 +31,17 @@ function updateInputs(btnVal){
 		return evaluator = btnVal;
 }
 
-// else if (checkOperator && evaluator != ''){
-// 		operator = evaluator;
-// 		evaluator = '';
-// 		input2 = '';
-
 function getResults (btnVal){
 	if(checkOperator(btnVal) && operator != '' && evaluator == '='){
 		return result = operate(input1,operator,input2);
-	} else if (checkOperator(btnVal) && input2 != ''){
-		//change first input to value of result
-		input1 = operate(input1,operator,input2)
-		//operator to evaluator and clear evaluator
+	} else if (checkOperator(btnVal) && operator != ''){
+		return result = operate(input1,operator,input2);
+	} else if (checkOperator(btnVal) && input2 != '' && evaluator != ''){
+		input1 = operate(input1,operator,input2);
 		input2 = '';
 		operator = evaluator;
 		evaluator = '';
 	}
-		//should update the value of input1 to the result
-	//return input1 = operate(input1,operator,input2)
 	 else
 		return result = 0;
 }
