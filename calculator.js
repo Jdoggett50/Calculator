@@ -27,11 +27,7 @@ function updateInputs(btnVal){
 	} else if (!checkOperator(btnVal) && input1 != '' && operator != ''){
 		input2 += btnVal;
 		return input2;
-	} //else if (checkOperator && operator != ''){
-		//should change the operator to equal evaluator
-		//operator = evaluator;
-	//} 
-	else 
+	} else 
 		return evaluator = btnVal;
 }
 
@@ -43,14 +39,19 @@ function updateInputs(btnVal){
 function getResults (btnVal){
 	if(checkOperator(btnVal) && operator != '' && evaluator == '='){
 		return result = operate(input1,operator,input2);
-	} 
+	} else if (checkOperator(btnVal) && input2 != ''){
+		//change first input to value of result
+		input1 = operate(input1,operator,input2)
+		//operator to evaluator and clear evaluator
+		input2 = '';
+		operator = evaluator;
+		evaluator = '';
+	}
 		//should update the value of input1 to the result
 	//return input1 = operate(input1,operator,input2)
 	 else
 		return result = 0;
 }
-//> populate result only if '=' after input2
-//> set input1 to be equal to the result of each expression in the case-
 //  of muliple operators after initial expression
 // result should be 0 unless 1 input is placed and submitted.
 // if (input2 != 0) } input2 = btnValue 
