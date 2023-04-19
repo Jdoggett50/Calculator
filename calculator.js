@@ -24,25 +24,34 @@ function updateInputs(btnVal){
 	} else if (checkOperator(btnVal) && input2 == ''){
 		operator += btnVal;
 		return operator;
-	} else if (!checkOperator(btnVal) && input1 != '' && operator != ''){
+	} else if (!checkOperator(btnVal) && input1 != ''){
 		input2 += btnVal;
 		return input2;
-	} else 
-		return evaluator = btnVal;
+	} else if (!checkOperator(btnVal) && input2 == ''){
+		input2 += btnVal;
+		return input2;
+	} else if (checkOperator(btnVal) && operator != '' && evaluator == ''){
+		evaluator = btnVal;
+		return evaluator;
+	} else if (){
+		input2 = ''
+		return input2;
+	}
+	else 
+		return operator;
 }
+
+//input 2 is being hung on logic. Seemingly, after evaluator
+//evaluator will cause it to operate BUT it will not replace the evaluator with the operator and take a new input2
+//input1 = 10 operator = + input2 = 10 evaluator = -
+//result = 20
 
 function getResults (btnVal){
 	if(checkOperator(btnVal) && operator != '' && evaluator == '='){
 		return result = operate(input1,operator,input2);
 	} else if (checkOperator(btnVal) && operator != ''){
 		return result = operate(input1,operator,input2);
-	} else if (checkOperator(btnVal) && input2 != '' && evaluator != ''){
-		input1 = operate(input1,operator,input2);
-		input2 = '';
-		operator = evaluator;
-		evaluator = '';
-	}
-	 else
+	} else
 		return result = 0;
 }
 //  of muliple operators after initial expression
