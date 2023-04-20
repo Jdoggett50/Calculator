@@ -12,33 +12,27 @@ btns.addEventListener('click', (evt) => {
 	console.log(`result = ${(getResults(evt.target.value))}`);
 })
 
+//evaluator needs to set the operator when all values are in their fields.
 function updateInputs(btnVal){
 	if(btnVal == 'AC'){
 		input1 = '';
 		operator = '';
 		input2 = '';
 		evaluator = '';
-	} else if(!checkOperator(btnVal) && operator == ''){
-		input1 += btnVal;
-		return input1;
-	} else if (checkOperator(btnVal) && input2 == ''){
-		operator += btnVal;
-		return operator;
-	} else if (!checkOperator(btnVal) && input1 != ''){
-		input2 += btnVal;
-		return input2;
-	} else if (!checkOperator(btnVal) && input2 == ''){
-		input2 += btnVal;
-		return input2;
 	} else if (checkOperator(btnVal) && operator != '' && evaluator == ''){
+		console.log('error: 1')
 		evaluator = btnVal;
-		return evaluator;
-	} else if (){
-		input2 = ''
-		return input2;
+	} else if(checkOperator(btnVal) && evaluator != ''){
+		evaluator = btnVal;
+		operator = evaluator;
+	} else if (!checkOperator(btnVal) && operator == ''){
+		input1 += btnVal;
+	} else if (!checkOperator(btnVal) && input1 != '' && operator != ''){
+		input2 += btnVal
+	} else if (checkOperator(btnVal) != '=' && input1 != ''){
+		console.log('error: 3')
+		operator = btnVal;
 	}
-	else 
-		return operator;
 }
 
 //input 2 is being hung on logic. Seemingly, after evaluator
@@ -46,14 +40,15 @@ function updateInputs(btnVal){
 //input1 = 10 operator = + input2 = 10 evaluator = -
 //result = 20
 
-function getResults (btnVal){
-	if(checkOperator(btnVal) && operator != '' && evaluator == '='){
-		return result = operate(input1,operator,input2);
-	} else if (checkOperator(btnVal) && operator != ''){
-		return result = operate(input1,operator,input2);
-	} else
-		return result = 0;
+function getResults(){
+	if (evaluator != '='){
+		result = operate(input1,operator,input2);
+		return result
+	} //else if (evaluator != '' && operator != ''){
+
+	//}
 }
+
 //  of muliple operators after initial expression
 // result should be 0 unless 1 input is placed and submitted.
 // if (input2 != 0) } input2 = btnValue 
