@@ -22,18 +22,20 @@ function updateInputs(btnVal){
 	} else if (checkOperator(btnVal) && operator && input1 && input2){
 		console.log('A')
 		evaluator = btnVal;
+		input1 = getResults();
+		input2 = '';
 	}
 	else if (!checkOperator(btnVal) && !operator){
 		console.log('B')
 		input1 += btnVal;
 	} else if (evaluator && evaluator != '='){
 		console.log('C')
-		input1 = getResults();
+		input2 += btnVal
 		operator = evaluator;
 		evaluator = '';
-		input2 = '';
 	} else if (!checkOperator(btnVal) && input1 && operator){
 		console.log('D')
+		evaluator = '';
 		input2 += btnVal
 	} else if (checkOperator(btnVal) != '=' && input1){
 	 	console.log('E')
