@@ -19,15 +19,16 @@ function updateInputs(btnVal){
 		operator = '';
 		input2 = '';
 		evaluator = '';
-	} else if (checkOperator(btnVal) && operator && input1 && operator && input2){
+	} else if (checkOperator(btnVal) && operator && input1 && input2){
 		console.log('A')
 		evaluator = btnVal;
 	}
 	else if (!checkOperator(btnVal) && !operator){
 		console.log('B')
 		input1 += btnVal;
-	} else if (getResults && evaluator && checkOperator != '='){
+	} else if (evaluator && evaluator != '='){
 		console.log('C')
+		input1 = getResults();
 		operator = evaluator;
 		evaluator = '';
 		input2 = '';
@@ -37,9 +38,7 @@ function updateInputs(btnVal){
 	} else if (checkOperator(btnVal) != '=' && input1){
 	 	console.log('E')
 	 	operator = btnVal;
-	} //else if (getResults){
-		//input1 = operate(input1,operator,input2)
-	//}
+	}
 }
 
 function getResults(){
