@@ -19,34 +19,34 @@ function updateInputs(btnVal){
 		operator = '';
 		input2 = '';
 		evaluator = '';
-	} else if (checkOperator(btnVal) && operator != '' && evaluator == ''){
-		console.log('error: 1')
+	} else if (checkOperator(btnVal) && operator && input1 && operator && input2){
+		console.log('A')
 		evaluator = btnVal;
-	} else if(checkOperator(btnVal) && evaluator != ''){
-		evaluator = btnVal;
-		operator = evaluator;
-	} else if (!checkOperator(btnVal) && operator == ''){
-		input1 += btnVal;
-	} else if (!checkOperator(btnVal) && input1 != '' && operator != ''){
-		input2 += btnVal
-	} else if (checkOperator(btnVal) != '=' && input1 != ''){
-		console.log('error: 3')
-		operator = btnVal;
 	}
+	else if (!checkOperator(btnVal) && !operator){
+		console.log('B')
+		input1 += btnVal;
+	} else if (getResults && evaluator && checkOperator != '='){
+		console.log('C')
+		operator = evaluator;
+		evaluator = '';
+		input2 = '';
+	} else if (!checkOperator(btnVal) && input1 && operator){
+		console.log('D')
+		input2 += btnVal
+	} else if (checkOperator(btnVal) != '=' && input1){
+	 	console.log('E')
+	 	operator = btnVal;
+	} //else if (getResults){
+		//input1 = operate(input1,operator,input2)
+	//}
 }
 
-//input 2 is being hung on logic. Seemingly, after evaluator
-//evaluator will cause it to operate BUT it will not replace the evaluator with the operator and take a new input2
-//input1 = 10 operator = + input2 = 10 evaluator = -
-//result = 20
-
 function getResults(){
-	if (evaluator != '='){
+	if (evaluator){
 		result = operate(input1,operator,input2);
-		return result
-	} //else if (evaluator != '' && operator != ''){
-
-	//}
+		return result;
+	} 
 }
 
 //  of muliple operators after initial expression
