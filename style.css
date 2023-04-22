@@ -1,9 +1,14 @@
-* {
-	box-sizing: border-box;
+@media screen and (min-width: 500px){
+	#wrapper{
+		margin-left: auto;
+		margin-right: auto;
+		width: 50vh;
+		height: 50vh;
+	}
 }
 #wrapper {
 	border: 2px solid black;
-	height: 100vh;
+	height: 50vh;
 }
 #result-container {
 	height: 23%;
@@ -12,10 +17,10 @@
 }
 .result {
 	display: flex;
-	justify-content: center;
-	align-items: flex-end; 
+	margin: auto;
 	border-bottom: 1px solid black;
 	border-right: 1px solid black;
+	border-left: 1px solid black;
 	background-color: white;
 	font-size: 30px;
 	height: 80%;
