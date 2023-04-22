@@ -11,35 +11,39 @@
 	height: 50vh;
 }
 #result-container {
+	display: flex;
+	justify-content: center;
 	height: 23%;
 	border-bottom: 1px solid black;
-	background-color: silver;
+	background-color: #A9A9A9;
 }
 .result {
 	display: flex;
+	justify-content: center;
 	margin: auto;
-	border-bottom: 1px solid black;
-	border-right: 1px solid black;
-	border-left: 1px solid black;
+	border: 1px solid black;
 	background-color: white;
 	font-size: 30px;
 	height: 80%;
 	width: 50%;
 }
 #selection-wrapper {
-	background-color: grey;
+	background-color: #696969;
 	height: 77%;
 	display: flex;
 }
 #numbers-container {
 	margin: 1% 1%;
 }
+#numbers-container :first-child{
+	background-color: #DEB887;
+}
 button {
 	border: 1px solid black;
 	font-size: 30px;
 	color: black;
 	border-radius: 30%;
-	background-color: silver;
+	background-color: #FFEBCD;
 }
 #numbers-container > button {
 	margin-top: 1%;
@@ -47,6 +51,7 @@ button {
 	width: 32%;
 }
 .operators > button {
+	background-color: #DEB887;
 	height: 24%;
 	width: 100%;
 }
