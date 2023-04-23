@@ -1,17 +1,19 @@
 const operators = ['+','-','*','/','=','^'];
+const acceptedKeys = ['1','2','3','4','5','6','7','8','9','0','+','-','*','/'];
 let input1 = '';
 let operator = '';
 let input2 = '';
 let evaluator = '';
 
-const btns = document.querySelector('#selection-wrapper')
-const resultBox = document.querySelector('.result > p')
+const btns = document.querySelector('#selection-wrapper');
+const resultBox = document.querySelector('.result > p');
 
 
-btns.addEventListener('click', (evt) => {
-	resultBox.textContent = `${updateInputs(evt.target.value)}`
-	
-})
+btns.addEventListener('click', evt => resultBox.textContent = `${updateInputs(evt.target.value)}`);
+// btns.addEventListener('keydown', (evt) => {
+// 	console.log(evt.code)
+// 	resultBox.textContent = `${updateInputs(keyPress)}`;
+// });
 
 function updateInputs(btnVal){
 	if(btnVal == 'AC' || (input1 == '0' && operator =='/' && input2 == '0')){
@@ -26,26 +28,26 @@ function updateInputs(btnVal){
 		evaluator = btnVal;
 		input1 = getResults();
 		input2 = '';
-		return input1
+		return input1;
 	} else if (!checkOperator(btnVal) && !operator){
 		console.log('C')
 		input1 += btnVal;
-		return input1
+		return input1;
 	} else if (evaluator && evaluator != '='){
 		console.log('D')
-		input2 += btnVal
+		input2 += btnVal;
 		operator = evaluator;
 		evaluator = '';
-		return input2
+		return input2;
 	} else if (!checkOperator(btnVal) && input1 && operator){
 		console.log('E')
 		evaluator = '';
-		input2 += btnVal
-		return input2
+		input2 += btnVal;
+		return input2;
 	} else if (checkOperator(btnVal) != '=' && input1){
 		console.log('F')
 		operator = btnVal;
-		return operator
+		return operator;
 	}
 }
 
@@ -68,7 +70,7 @@ function operate (num1, operator, num2) {
 		result = divide(num1,num2);
 	} else 
 		result = powered(num1,num2);
-	return result
+	return result;
 }
 
 function checkOperator(btnVal) {
@@ -78,7 +80,7 @@ function checkOperator(btnVal) {
 			return isOperator = operators[i];
 		}
 	}
-	return isOperator
+	return isOperator;
 }
 
 function add (num1, num2) {
@@ -97,3 +99,12 @@ function powered (num1,num2){
     return num1 ** num2;
 }
 
+function checkAcceptedKeys(btnVal){
+	let isAccepted = false;
+	for(let i = 0; i < acceptedKeys.length; i++){
+		if(acceptedKeys[i] == btnVal){
+			return isAccepted = acceptedKeys[i];
+		}
+	}
+	return isAccepted;
+}
