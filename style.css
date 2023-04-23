@@ -38,19 +38,19 @@
 #numbers-container :first-child{
 	background-color: #DEB887;
 }
-button {
+.button {
 	border: 1px solid black;
 	font-size: 30px;
 	color: black;
 	border-radius: 30%;
 	background-color: #FFEBCD;
 }
-#numbers-container > button {
+#numbers-container > .button {
 	margin-top: 1%;
 	height: 24.5%;
 	width: 32%;
 }
-.operators > button {
+.operators > .button {
 	background-color: #DEB887;
 	height: 24%;
 	width: 100%;
