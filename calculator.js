@@ -21,35 +21,31 @@ document.addEventListener('keydown', (evt) => {
 
 function updateInputs(btnVal){
 	if(btnVal == 'AC' || (input1 == '0' && operator =='/' && input2 == '0')){
-		console.log('A')
 		input1 = '';
 		operator = '';
 		input2 = '';
 		evaluator = '';
 		return result = 0;
+	} else if (!checkAcceptedKeys(btnVal)){
+		return ''
 	} else if (checkOperator(btnVal) && operator && input1 && input2){
-		console.log('B')
 		evaluator = btnVal;
 		input1 = getResults();
 		input2 = '';
 		return input1;
 	} else if (!checkOperator(btnVal) && !operator){
-		console.log('C')
 		input1 += btnVal;
 		return input1;
 	} else if (evaluator && evaluator != '='){
-		console.log('D')
 		input2 += btnVal;
 		operator = evaluator;
 		evaluator = '';
 		return input2;
 	} else if (!checkOperator(btnVal) && input1 && operator){
-		console.log('E')
 		evaluator = '';
 		input2 += btnVal;
 		return input2;
 	} else if (checkOperator(btnVal) != '=' && input1){
-		console.log('F')
 		operator = btnVal;
 		return operator;
 	}
@@ -104,7 +100,6 @@ function powered (num1,num2){
 }
 
 function checkAcceptedKeys(btnVal){
-	let isAccepted = false;
 	for(let i = 0; i < acceptedKeys.length; i++){
 		if(acceptedKeys[i] == btnVal){
 			return isAccepted = acceptedKeys[i];
