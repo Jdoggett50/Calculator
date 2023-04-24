@@ -1,5 +1,5 @@
 const operators = ['+','-','*','/','=','^'];
-const acceptedKeys = ['1','2','3','4','5','6','7','8','9','0','+','-','*','/'];
+const acceptedKeys = ['1','2','3','4','5','6','7','8','9','0','+','-','*','/','='];
 let input1 = '';
 let operator = '';
 let input2 = '';
@@ -9,11 +9,15 @@ const btns = document.querySelector('#selection-wrapper');
 const resultBox = document.querySelector('.result > p');
 
 
-btns.addEventListener('click', evt => resultBox.textContent = `${updateInputs(evt.target.value)}`);
-// btns.addEventListener('keydown', (evt) => {
-// 	console.log(evt.code)
-// 	resultBox.textContent = `${updateInputs(keyPress)}`;
-// });
+btns.addEventListener('click', evt => {
+	if (evt.target.classList.contains('button')){
+		resultBox.textContent = `${updateInputs(evt.target.value)}`
+	}
+});
+document.addEventListener('keydown', (evt) => {
+	let checkedKeys = checkAcceptedKeys(evt.key);
+	resultBox.textContent = `${updateInputs(checkedKeys)}`
+});
 
 function updateInputs(btnVal){
 	if(btnVal == 'AC' || (input1 == '0' && operator =='/' && input2 == '0')){
@@ -106,5 +110,5 @@ function checkAcceptedKeys(btnVal){
 			return isAccepted = acceptedKeys[i];
 		}
 	}
-	return isAccepted;
+	return 
 }
