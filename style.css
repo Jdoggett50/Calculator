@@ -1,9 +1,8 @@
-@media screen and (min-width: 500px){
-	#wrapper{
+@media screen and (min-width: 310px){
+	#wrapper {
 		margin-left: auto;
 		margin-right: auto;
 		width: 50vh;
-		height: 50vh;
 	}
 }
 #wrapper {
@@ -23,7 +22,7 @@
 	margin: auto;
 	border: 1px solid black;
 	background-color: white;
-	font-size: 30px;
+	font-size: 4vh;
 	height: 80%;
 	width: 50%;
 }
@@ -53,7 +52,7 @@
 .operators > .button {
 	background-color: #DEB887;
 	height: 24%;
-	width: 100%;
+	/* min-width: 80%; */
 }
 .operators {
 	margin: 3% 2% 1% 0;

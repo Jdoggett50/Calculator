@@ -27,7 +27,7 @@ function updateInputs(btnVal){
 		evaluator = '';
 		return result = 0;
 	} else if (!checkAcceptedKeys(btnVal)){
-		return ''
+		return '';
 	} else if (checkOperator(btnVal) && operator && input1 && input2){
 		evaluator = btnVal;
 		input1 = getResults();
@@ -48,8 +48,10 @@ function updateInputs(btnVal){
 	} else if (checkOperator(btnVal) != '=' && input1){
 		operator = btnVal;
 		return operator;
-	}
-}
+	} else
+		return input1 = '';
+} 
+
 
 function getResults(){
 	if (evaluator){
@@ -107,3 +109,7 @@ function checkAcceptedKeys(btnVal){
 	}
 	return 
 }
+
+// fixed result numbers not getting smaller with window resize based on VH
+// add clear single input feature and evaluate on enter feature
+// refactor checkOperator function to validate the operators and the key inputs
