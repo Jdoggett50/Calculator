@@ -8,5 +8,5 @@ What it's capable of:
 What I learned:
   -How to register keyboard events
   -Using helper functions that check inputs
-What can be improved?
+What can be improved? 
 If I were to refactor my code, I would asses the complex logical operator that determines inputs. 
