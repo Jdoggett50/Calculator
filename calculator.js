@@ -110,6 +110,7 @@ function checkAcceptedKeys(btnVal){
 	return 
 }
 
-// fixed result numbers not getting smaller with window resize based on VH
-// add clear single input feature and evaluate on enter feature
+// add clear single input feature 
+// evaluate on enter feature
+// add decimal support
 // refactor checkOperator function to validate the operators and the key inputs
