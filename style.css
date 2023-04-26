@@ -1,12 +1,13 @@
-@media screen and (min-width: 310px){
+@media screen and (min-width: 400px){
 	#wrapper {
 		margin-left: auto;
 		margin-right: auto;
-		width: 50vh;
+		width: 50%;
 	}
 }
 #wrapper {
 	border: 2px solid black;
+	width: 50vh;
 	height: 50vh;
 }
 #result-container {
@@ -52,7 +53,7 @@
 .operators > .button {
 	background-color: #DEB887;
 	height: 24%;
-	/* min-width: 80%; */
+	min-width: 80%;
 }
 .operators {
 	margin: 3% 2% 1% 0;

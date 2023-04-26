@@ -1,22 +1,23 @@
 const operators = ['+','-','*','/','=','^'];
-const acceptedKeys = ['1','2','3','4','5','6','7','8','9','0','+','-','*','/','='];
+const acceptedKeys = ['1','2','3','4','5','6','7','8','9','0','+','-','*','/','=','.'];
 let input1 = '';
 let operator = '';
 let input2 = '';
 let evaluator = '';
 
-const btns = document.querySelector('#selection-wrapper');
+const btns = document.querySelector('#numbers-container')
 const resultBox = document.querySelector('.result > p');
-
 
 btns.addEventListener('click', evt => {
 	if (evt.target.classList.contains('button')){
 		resultBox.textContent = `${updateInputs(evt.target.value)}`
 	}
 });
+
 document.addEventListener('keydown', (evt) => {
-	let checkedKeys = checkAcceptedKeys(evt.key);
-	resultBox.textContent = `${updateInputs(checkedKeys)}`
+	if (acceptedKeys.includes(evt.key)){ 
+		resultBox.textContent = `${updateInputs(evt.key)}`
+	}
 });
 
 function updateInputs(btnVal){
@@ -26,14 +27,14 @@ function updateInputs(btnVal){
 		input2 = '';
 		evaluator = '';
 		return result = 0;
-	} else if (!checkAcceptedKeys(btnVal)){
+	} else if (!acceptedKeys.includes(btnVal)){
 		return '';
-	} else if (checkOperator(btnVal) && operator && input1 && input2){
+	} else if (operators.includes(btnVal) && operator && input1 && input2){
 		evaluator = btnVal;
 		input1 = getResults();
 		input2 = '';
 		return input1;
-	} else if (!checkOperator(btnVal) && !operator){
+	} else if (!operators.includes(btnVal) && !operator){
 		input1 += btnVal;
 		return input1;
 	} else if (evaluator && evaluator != '='){
@@ -41,17 +42,16 @@ function updateInputs(btnVal){
 		operator = evaluator;
 		evaluator = '';
 		return input2;
-	} else if (!checkOperator(btnVal) && input1 && operator){
+	} else if (!operators.includes(btnVal) && input1 && operator){
 		evaluator = '';
 		input2 += btnVal;
 		return input2;
-	} else if (checkOperator(btnVal) != '=' && input1){
+	} else if (operators.includes(btnVal) != '=' && input1){
 		operator = btnVal;
 		return operator;
 	} else
 		return input1 = '';
 } 
-
 
 function getResults(){
 	if (evaluator){
@@ -75,16 +75,6 @@ function operate (num1, operator, num2) {
 	return result;
 }
 
-function checkOperator(btnVal) {
-	let isOperator = false;
-	for(let i = 0; i < operators.length; i++){
-		if(operators[i] == btnVal){
-			return isOperator = operators[i];
-		}
-	}
-	return isOperator;
-}
-
 function add (num1, num2) {
     return parseInt(num1) + parseInt(num2);
 }
@@ -101,16 +91,12 @@ function powered (num1,num2){
     return num1 ** num2;
 }
 
-function checkAcceptedKeys(btnVal){
-	for(let i = 0; i < acceptedKeys.length; i++){
-		if(acceptedKeys[i] == btnVal){
-			return isAccepted = acceptedKeys[i];
-		}
-	}
-	return 
-}
+//decimals can only exist once in a number
+//look at number and see if it has a decimal, if not return number
+//decimals are usually only 2 integers long (tenths and hundreths place).
+//values after decimals are only numbers, not operators.
 
 // add clear single input feature 
-// evaluate on enter feature
+// add evaluate on enter feature
 // add decimal support
-// refactor checkOperator function to validate the operators and the key inputs
+//included the array.includes method to check for acceptedKeys and operators
