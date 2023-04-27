@@ -5,13 +5,14 @@ let operator = '';
 let input2 = '';
 let evaluator = '';
 
-const btns = document.querySelector('#numbers-container')
+const btns = document.querySelector('#selection-wrapper')
 const resultBox = document.querySelector('.result > p');
 
 btns.addEventListener('click', evt => {
 	if (evt.target.classList.contains('button')){
 		resultBox.textContent = `${updateInputs(evt.target.value)}`
 	}
+	console.log(`input1: ${input1} operator: ${operator} input2: ${input2} evaluator: ${evaluator} `)
 });
 
 document.addEventListener('keydown', (evt) => {
@@ -31,7 +32,7 @@ function updateInputs(btnVal){
 		return '';
 	} else if (operators.includes(btnVal) && operator && input1 && input2){
 		evaluator = btnVal;
-		input1 = getResults();
+		input1 = getResults(operator);
 		input2 = '';
 		return input1;
 	} else if (!operators.includes(btnVal) && !operator){
@@ -54,29 +55,30 @@ function updateInputs(btnVal){
 } 
 
 function getResults(){
-	if (evaluator){
-		result = operate(input1,operator,input2);
-		return result;
+	if (evaluator.includes('.')){
+		result = operate(operator);
+		return result.toFixed(2);
 	}
 }
 
-function operate (num1, operator, num2) {
-	let expression = [num1,operator,num2];
-	if (expression.includes('+')){
-		result = add(num1,num2);
-	} else if (expression.includes('-')) {
-		result = subtract(num1,num2);
-	} else if (expression.includes('*')) {
-		result = multiply(num1,num2);
-	} else if (expression.includes('/')) {
-		result = divide(num1,num2);
-	} else 
-		result = powered(num1,num2);
-	return result;
+function operate (op) {
+	switch(op) {
+		case '+':
+			add(input1,input2);
+			break;
+		case '-':
+			subtract(input1,input2);
+			break;
+		case '*':
+			multiply(input1,input2);
+			break;
+		case '/':
+			divide(input1,input2);
+	}
 }
 
 function add (num1, num2) {
-    return parseInt(num1) + parseInt(num2);
+    return parseFloat(num1) + parseFloat(num2);
 }
 function subtract (num1, num2) {
     return num1 - num2;
@@ -87,16 +89,13 @@ function multiply (num1, num2) {
 function divide (num1,num2) {
     return num1 / num2;
 }
-function powered (num1,num2){
-    return num1 ** num2;
-}
-
-//decimals can only exist once in a number
-//look at number and see if it has a decimal, if not return number
-//decimals are usually only 2 integers long (tenths and hundreths place).
-//values after decimals are only numbers, not operators.
 
 // add clear single input feature 
 // add evaluate on enter feature
 // add decimal support
-//included the array.includes method to check for acceptedKeys and operators
+
+//constraints:
+// periods cannot used more than once in a given input
+// can't remove it from acceptedKeys array, eventListeners would bypass
+// period cannot be an operator
+// toFixed(2) is causing 00 to show up when clean evaluation is made
