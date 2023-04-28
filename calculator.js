@@ -12,7 +12,7 @@ btns.addEventListener('click', evt => {
 	if (evt.target.classList.contains('button')){
 		resultBox.textContent = `${updateInputs(evt.target.value)}`
 	}
-	console.log(`input1: ${input1} operator: ${operator} input2: ${input2} evaluator: ${evaluator} `)
+	console.log(`input1: ${input1} operator: ${operator} input2: ${input2} evaluator: ${evaluator}`)
 });
 
 document.addEventListener('keydown', (evt) => {
@@ -23,58 +23,58 @@ document.addEventListener('keydown', (evt) => {
 
 function updateInputs(btnVal){
 	if(btnVal == 'AC' || (input1 == '0' && operator =='/' && input2 == '0')){
+		console.log('A')
 		input1 = '';
 		operator = '';
 		input2 = '';
 		evaluator = '';
 		return result = 0;
 	} else if (!acceptedKeys.includes(btnVal)){
+		console.log('B')
 		return '';
 	} else if (operators.includes(btnVal) && operator && input1 && input2){
+		console.log('C')
 		evaluator = btnVal;
-		input1 = getResults(operator);
+		input1 = getResults();
 		input2 = '';
 		return input1;
 	} else if (!operators.includes(btnVal) && !operator){
-		input1 += btnVal;
+		console.log('D')
+		input1 += checkDecimal(btnVal);
 		return input1;
 	} else if (evaluator && evaluator != '='){
-		input2 += btnVal;
+		console.log('E')
+		input2 += checkDecimal(btnVal);
 		operator = evaluator;
 		evaluator = '';
 		return input2;
 	} else if (!operators.includes(btnVal) && input1 && operator){
+		console.log('F')
 		evaluator = '';
-		input2 += btnVal;
+		input2 += checkDecimal(btnVal);
 		return input2;
 	} else if (operators.includes(btnVal) != '=' && input1){
+		console.log('G')
 		operator = btnVal;
 		return operator;
 	} else
+		console.log('H')
 		return input1 = '';
 } 
 
 function getResults(){
-	if (evaluator.includes('.')){
-		result = operate(operator);
-		return result.toFixed(2);
+	if (evaluator){
+		result = operate(operator)
+		return result
 	}
 }
-
-function operate (op) {
-	switch(op) {
-		case '+':
-			add(input1,input2);
-			break;
-		case '-':
-			subtract(input1,input2);
-			break;
-		case '*':
-			multiply(input1,input2);
-			break;
-		case '/':
-			divide(input1,input2);
-	}
+//works for decimals
+function checkDecimal (btnVal){
+	if ((btnVal == '.' && input1.includes('.') && !input2)||btnVal == '.' && input2.includes ('.')){
+		return ''
+	} else 
+		console.log('CD')
+		return btnVal
 }
 
 function add (num1, num2) {
@@ -90,12 +90,29 @@ function divide (num1,num2) {
     return num1 / num2;
 }
 
+function operate(op) {
+	switch (op){
+		case "+":
+			result = add(input1,input2);
+			break;
+		case '-':
+			result = subtract(input1,input2);
+			break;
+		case '*':
+			result = multiply(input1,input2);
+			break;
+		case '/':
+			result = divide(input1,input2);
+	}
+	return result
+}
 // add clear single input feature 
 // add evaluate on enter feature
 // add decimal support
 
-//constraints:
-// periods cannot used more than once in a given input
-// can't remove it from acceptedKeys array, eventListeners would bypass
-// period cannot be an operator
-// toFixed(2) is causing 00 to show up when clean evaluation is made
+// possible solutions:
+//  return nothing when a decimal is pressed and input1 or input2 includes a decimal
+
+//decimal constraints:
+// look at input1 and input2 and see if they have a decimal
+
