@@ -71,12 +71,7 @@ function getResults(){
 }
 //works for decimals
 function checkDecimal (btnVal){
-	if(btnVal == '.' && input1.includes('.') && !input2){
-		return ''
-	} else if (btnVal == '.' && input2.includes ('.')){
-		return ''
-	} else if (operators.includes(btnVal)){
-		console.log('CD')
+	if((btnVal == '.' && input1.includes('.') && !input2) || (btnVal == '.' && input2.includes ('.')) || (operators.includes(btnVal))){
 		return ''
 	} else 
 	return btnVal
