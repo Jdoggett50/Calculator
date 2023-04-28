@@ -9,6 +9,7 @@ const btns = document.querySelector('#selection-wrapper')
 const resultBox = document.querySelector('.result > p');
 
 btns.addEventListener('click', evt => {
+	console.log(`input1: ${input1} operator: ${operator} input2: ${input2} evaluator: ${evaluator} `)
 	if (evt.target.classList.contains('button')){
 		resultBox.textContent = `${updateInputs(evt.target.value)}`
 	}
@@ -70,11 +71,15 @@ function getResults(){
 }
 //works for decimals
 function checkDecimal (btnVal){
-	if ((btnVal == '.' && input1.includes('.') && !input2)||btnVal == '.' && input2.includes ('.')){
+	if(btnVal == '.' && input1.includes('.') && !input2){
+		return ''
+	} else if (btnVal == '.' && input2.includes ('.')){
+		return ''
+	} else if (operators.includes(btnVal)){
+		console.log('CD')
 		return ''
 	} else 
-		console.log('CD')
-		return btnVal
+	return btnVal
 }
 
 function add (num1, num2) {
@@ -114,5 +119,6 @@ function operate(op) {
 //  return nothing when a decimal is pressed and input1 or input2 includes a decimal
 
 //decimal constraints:
-// look at input1 and input2 and see if they have a decimal
-
+// first iteration works with decimal, second iteration works with decimal,
+// assignment from evaluator to input1 works, assignment to input2 works as long as-
+// the input isn't a decimal
