@@ -45,6 +45,7 @@ function updateInputs(btnVal){
 	} else if (!operators.includes(btnVal) && !operator){
 		console.log('D');
 		input1 += checkDecimal(btnVal);
+		console.log(typeof(input1))
 		return input1;
 	} else if (evaluator && evaluator != '=' && evaluator != 'Enter' && evaluator != 'Backspace' && input2){
 		//only want this to happen if input 2 exists, issue is that this causes input2 to exist
@@ -103,20 +104,16 @@ function add (num1, num2) {
     return parseFloat(num1) + parseFloat(num2);
 }
 function subtract (num1, num2) {
-    return num1 - num2;
+    return parseFloat(num1) - parseFloat(num2);
 }
 function multiply (num1, num2) {
-    return num1 * num2;
+    return parseFloat(num1) * parseFloat(num2);
 }
 function divide (num1,num2) {
-    return num1 / num2;
+    return parseFloat(num1) / parseFloat(num2);
 }
 
 // add clear single input feature 
-// add decimal support- decimal support under construction
 
-//decimal constraints:
-
-
-// possible solutions:
-//  
+//Decimal places:
+// 
