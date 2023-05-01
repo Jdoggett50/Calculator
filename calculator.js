@@ -45,7 +45,6 @@ function updateInputs(btnVal){
 	} else if (!operators.includes(btnVal) && !operator){
 		console.log('D');
 		input1 += checkDecimal(btnVal);
-		console.log(typeof(input1))
 		return input1;
 	} else if (evaluator && evaluator != '=' && evaluator != 'Enter' && evaluator != 'Backspace' && input2){
 		//only want this to happen if input 2 exists, issue is that this causes input2 to exist
@@ -61,6 +60,7 @@ function updateInputs(btnVal){
 		return input2;
 	} else if (operators.includes(btnVal) != '=' && input1){
 		console.log('G');
+		input2 = '';
 		operator = btnVal;
 		return operator;
 	} else
@@ -70,20 +70,20 @@ function updateInputs(btnVal){
 
 function getResults(){
 	if ((evaluator == '=' || evaluator == 'Enter') || (evaluator != '=' || evaluator != 'Enter')){
-		//result
+		//result from operate
 		return operate(operator);
-	} else 
-		return '';
+	} 
+	return '';
 }
 
-function checkDecimal (btnVal){
+function checkDecimal(btnVal){
 	if((btnVal == '.' && input1.includes('.') && !input2) || (btnVal == '.' && input2.includes ('.') || (operators.includes(btnVal)))){
 		return '';
-	} else 
+	} 
 	return btnVal;
 }
 
-function operate(op) {
+function operate(op){
 	switch (op){
 		case "+":
 			result = add(input1,input2);
@@ -97,11 +97,11 @@ function operate(op) {
 		case '/':
 			result = divide(input1,input2);
 	}
-	return result.toString()
+	return result.toString();
 }
 
-function add (num1, num2) {
-    return parseFloat(num1) + parseFloat(num2);
+function add (num1, num2){
+	return parseFloat(num1) + parseFloat(num2);
 }
 function subtract (num1, num2) {
     return parseFloat(num1) - parseFloat(num2);
@@ -116,4 +116,4 @@ function divide (num1,num2) {
 // add clear single input feature 
 
 //Decimal places:
-// 
+// currently, decimals are in string format, this is why they cannot be set to a fixed amount
