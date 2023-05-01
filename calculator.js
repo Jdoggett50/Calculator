@@ -101,19 +101,22 @@ function operate(op){
 }
 
 function add (num1, num2){
-	return parseFloat(num1) + parseFloat(num2);
+	let result = parseFloat(num1) + parseFloat(num2);
+	return result.toFixed(2);
 }
 function subtract (num1, num2) {
-    return parseFloat(num1) - parseFloat(num2);
+    let result = parseFloat(num1) - parseFloat(num2)
+	return result.toFixed(2);
 }
 function multiply (num1, num2) {
-    return parseFloat(num1) * parseFloat(num2);
+    let result = parseFloat(num1) * parseFloat(num2)
+	return result.toFixed(2);
 }
 function divide (num1,num2) {
-    return parseFloat(num1) / parseFloat(num2);
+    let result = parseFloat(num1) / parseFloat(num2)
+	return result.toFixed(2);
 }
 
 // add clear single input feature 
 
 //Decimal places:
-// currently, decimals are in string format, this is why they cannot be set to a fixed amount
