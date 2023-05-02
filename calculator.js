@@ -47,7 +47,6 @@ function updateInputs(btnVal){
 		input1 += checkDecimal(btnVal);
 		return input1;
 	} else if (evaluator && evaluator != '=' && evaluator != 'Enter' && evaluator != 'Backspace' && input2){
-		//only want this to happen if input 2 exists, issue is that this causes input2 to exist
 		console.log('E');
 		input2 += checkDecimal(btnVal);
 		operator = evaluator;
@@ -117,6 +116,15 @@ function divide (num1,num2) {
 	return result.toFixed(2);
 }
 
-// add clear single input feature 
-
-//Decimal places:
+//reads btnVals and executes eraseLast() when backspace is pressed
+function checkBackSpace(btnVal){
+	if (btnVal == 'BackSpace'){
+		return eraseLast(input1)
+	} return
+}
+//removes last value from input
+function eraseLast(input) {
+	let inputArray = input.split('');
+	inputArray.pop()
+	return inputArray.join('')
+}
