@@ -1,5 +1,5 @@
-const operators = ['+','-','*','/','=','^','Enter','BackSpace','Escape'];
-const acceptedKeys = ['1','2','3','4','5','6','7','8','9','0','+','-','*','/','=','.','Enter','Backspace','Escape'];
+const operators = ['+','-','*','/','=','^','Enter'];
+const acceptedKeys = ['1','2','3','4','5','6','7','8','9','0','+','-','*','/','=','.','Enter'];
 let input1 = '';
 let operator = '';
 let input2 = '';
@@ -23,65 +23,38 @@ document.addEventListener('keydown', (evt) => {
 	console.log(`input1: ${input1} operator: ${operator} input2: ${input2} evaluator: ${evaluator} result: ${getResults()}`);
 });
 
-function updateInputs(btnVal){
-	if(btnVal == 'AC' || (input1 == '0' && operator =='/' && input2 == '0')){
-		console.log('A');
-		input1 = '';
-		operator = '';
-		input2 = '';
-		evaluator = '';
-		return result = '0';
-	} else if (!acceptedKeys.includes(btnVal) || (getResults() && btnVal == 'Enter' || btnVal == '=')){
-		console.log('B');
-		operator = '';
-		return getResults();
-	} else if (operators.includes(btnVal) && operator && input1 && input2){
-		console.log('C');
-		evaluator = btnVal;
-		input1 = getResults();
-		input2 = '';
-		operator = evaluator;
-		return input1;
-	} else if (!operators.includes(btnVal) && !operator){
-		console.log('D');
-		input1 += checkDecimal(btnVal);
-		return input1;
-	} else if (evaluator && evaluator != '=' && evaluator != 'Enter' && evaluator != 'Backspace' && input2){
-		console.log('E');
-		input2 += checkDecimal(btnVal);
-		operator = evaluator;
-		evaluator = '';
-		return input2;
-	} else if (!operators.includes(btnVal) && input1 && operator && btnVal != 'BackSpace'){
-		console.log('F');
-		evaluator = '';
-		input2 += checkDecimal(btnVal);
-		return input2;
-	} else if (operators.includes(btnVal) != '=' && input1){
-		console.log('G');
-		input2 = '';
-		operator = btnVal;
-		return operator;
-	} else
-		console.log('H');
-		return input1 = '';
-} 
+//reads btnVal and returns inputs based on operator and opposing inputs
+function getInputs(btnVal){
+	if(operator && input1){
+		return input2 += checkDecimal(btnVal);
+	}
+	if (!operator && !input2){
+		return input1 += checkDecimal(btnVal)
+	}
+	return
+}
 
-function getResults(){
-	if ((evaluator == '=' || evaluator == 'Enter') || (evaluator != '=' || evaluator != 'Enter')){
-		//result from operate
+function getEvalAndOperator(btnVal){
+	if(getResults()){
+		
+	}
+}
+
+//if btnVal is any operator, return the result if not, return undefined string
+function getResults(btnVal){
+	if (operators.includes(btnVal)){
 		return operate(operator);
 	} 
 	return '';
 }
-
+//when btnVal is '.' and input1 or input2 includes a '.' return undefined string.
 function checkDecimal(btnVal){
-	if((btnVal == '.' && input1.includes('.') && !input2) || (btnVal == '.' && input2.includes ('.') || (operators.includes(btnVal)))){
+	if((btnVal == '.' && input1.includes('.') && input2.includes('.')) || (operators.includes(btnVal))){
 		return '';
 	} 
 	return btnVal;
 }
-
+//provides result based on whether an operator is present in the expression 
 function operate(op){
 	switch (op){
 		case "+":
@@ -98,7 +71,7 @@ function operate(op){
 	}
 	return result.toString();
 }
-
+//evaluating functions
 function add (num1, num2){
 	let result = parseFloat(num1) + parseFloat(num2);
 	return result.toFixed(2);
@@ -116,11 +89,16 @@ function divide (num1,num2) {
 	return result.toFixed(2);
 }
 
+
 //reads btnVals and executes eraseLast() when backspace is pressed
 function checkBackSpace(btnVal){
-	if (btnVal == 'BackSpace'){
+	if(btnVal == 'BackSpace' && !input1 && !operator && !evaluator){
 		return eraseLast(input1)
-	} return
+	}
+	if(btnVal == 'BackSpace' && operator && !input2 && !evaluator){
+		return eraseLast(input2)
+	}
+	return
 }
 //removes last value from input
 function eraseLast(input) {
