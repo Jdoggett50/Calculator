@@ -11,33 +11,30 @@ const resultBox = document.querySelector('.result > p');
 
 btns.addEventListener('click', evt => {
 	if (evt.target.classList.contains('button')){
-		resultBox.textContent = `${updateInputs(evt.target.value)}`;
-	}
-	console.log(`input1: ${input1} operator: ${operator} input2: ${input2} evaluator: ${evaluator} result: ${getResults()}`);
-});
-
-document.addEventListener('keydown', (evt) => {
-	if (acceptedKeys.includes(evt.key)){ 
-		resultBox.textContent = `${updateInputs(evt.key)}`;
+		resultBox.textContent = `${getInputs(evt.target.value)}`;
 	}
 	console.log(`input1: ${input1} operator: ${operator} input2: ${input2} evaluator: ${evaluator} result: ${getResults()}`);
 });
 
 //reads btnVal and returns inputs based on operator and opposing inputs
 function getInputs(btnVal){
-	if(operator && input1){
+	// if(){
+
+	// }
+	if(operator){
+		console.log ('c');
 		return input2 += checkDecimal(btnVal);
 	}
+	if(operators.includes(btnVal) && input1){
+		console.log('d');
+		return operator = btnVal;
+	}
 	if (!operator && !input2){
+		console.log('e');
 		return input1 += checkDecimal(btnVal)
 	}
-	return
-}
-
-function getEvalAndOperator(btnVal){
-	if(getResults()){
-		
-	}
+	console.log('bad logic')
+	return ''
 }
 
 //if btnVal is any operator, return the result if not, return undefined string
@@ -89,14 +86,16 @@ function divide (num1,num2) {
 	return result.toFixed(2);
 }
 
-
 //reads btnVals and executes eraseLast() when backspace is pressed
-function checkBackSpace(btnVal){
-	if(btnVal == 'BackSpace' && !input1 && !operator && !evaluator){
-		return eraseLast(input1)
+function clearSelection(btnVal){
+	if(btnVal == 'BackSpace' ){
+		return eraseLast(getInputs(btnVal))
 	}
-	if(btnVal == 'BackSpace' && operator && !input2 && !evaluator){
-		return eraseLast(input2)
+	if(btnVal == 'AC'){
+		input1 = '';
+		input2 = '';
+		operator = '';
+		evaluator = '';
 	}
 	return
 }
