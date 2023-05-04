@@ -1,5 +1,3 @@
-const operators = ['+','-','*','/','=','^','Enter'];
-const acceptedKeys = ['1','2','3','4','5','6','7','8','9','0','+','-','*','/','=','.','Enter'];
 let input1 = '';
 let operator = '';
 let input2 = '';
@@ -18,18 +16,19 @@ btns.addEventListener('click', evt => {
 
 //reads btnVal and returns inputs based on operator and opposing inputs
 function getInputs(btnVal){
-	// if(){
-
-	// }
-	if(operator){
+	if(evaluator){
+		console.log('a')
+		input1 = getResults(btnVal)
+	}
+	if(getNums(btnVal) && operator && !getOperators(btnVal)){
 		console.log ('c');
 		return input2 += checkDecimal(btnVal);
 	}
-	if(operators.includes(btnVal) && input1){
+	if(getOperators(btnVal) && input1){
 		console.log('d');
 		return operator = btnVal;
 	}
-	if (!operator && !input2){
+	if (getNums(btnVal) && !operator){
 		console.log('e');
 		return input1 += checkDecimal(btnVal)
 	}
@@ -39,14 +38,14 @@ function getInputs(btnVal){
 
 //if btnVal is any operator, return the result if not, return undefined string
 function getResults(btnVal){
-	if (operators.includes(btnVal)){
+	if (getOperators(btnVal) || btnVal == 'Enter'){
 		return operate(operator);
 	} 
 	return '';
 }
 //when btnVal is '.' and input1 or input2 includes a '.' return undefined string.
 function checkDecimal(btnVal){
-	if((btnVal == '.' && input1.includes('.') && input2.includes('.')) || (operators.includes(btnVal))){
+	if((btnVal == '.' && input1.includes('.') && input2.includes('.'))){
 		return '';
 	} 
 	return btnVal;
@@ -99,9 +98,24 @@ function clearSelection(btnVal){
 	}
 	return
 }
+
 //removes last value from input
 function eraseLast(input) {
 	let inputArray = input.split('');
 	inputArray.pop()
 	return inputArray.join('')
+}
+
+function getOperators(btnVal){
+	if (btnVal == '=' || btnVal == '+' || btnVal == '-' || btnVal == '*' || btnVal == '/'){
+		return btnVal
+	}
+	return
+}
+
+function getNums(btnVal){
+	if(btnVal >= '0' || btnVal <= '9'){
+		return btnVal;
+	}
+	return
 }
