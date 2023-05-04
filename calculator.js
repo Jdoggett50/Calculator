@@ -16,24 +16,23 @@ btns.addEventListener('click', evt => {
 
 //reads btnVal and returns inputs based on operator and opposing inputs
 function getInputs(btnVal){
-	if(evaluator){
-		console.log('a')
-		input1 = getResults(btnVal)
-	}
+	// if(){
+
+	// }
 	if(getNums(btnVal) && operator && !getOperators(btnVal)){
-		console.log ('c');
-		return input2 += checkDecimal(btnVal);
+		console.log ('a');
+		return input2 += getOnlyNums(btnVal);
 	}
 	if(getOperators(btnVal) && input1){
-		console.log('d');
+		console.log('b');
 		return operator = btnVal;
 	}
 	if (getNums(btnVal) && !operator){
-		console.log('e');
-		return input1 += checkDecimal(btnVal)
+		console.log('c');
+		return input1 += getOnlyNums(btnVal);
 	}
-	console.log('bad logic')
-	return ''
+	console.log('bad logic');
+	return '';
 }
 
 //if btnVal is any operator, return the result if not, return undefined string
@@ -43,12 +42,15 @@ function getResults(btnVal){
 	} 
 	return '';
 }
-//when btnVal is '.' and input1 or input2 includes a '.' return undefined string.
-function checkDecimal(btnVal){
+
+function getOnlyNums(btnVal){
+	if(btnVal >= '0' || btnVal <= '9'){
+		return btnVal;
+	}
 	if((btnVal == '.' && input1.includes('.') && input2.includes('.'))){
 		return '';
-	} 
-	return btnVal;
+	}
+	return btnVal
 }
 //provides result based on whether an operator is present in the expression 
 function operate(op){
@@ -109,13 +111,6 @@ function eraseLast(input) {
 function getOperators(btnVal){
 	if (btnVal == '=' || btnVal == '+' || btnVal == '-' || btnVal == '*' || btnVal == '/'){
 		return btnVal
-	}
-	return
-}
-
-function getNums(btnVal){
-	if(btnVal >= '0' || btnVal <= '9'){
-		return btnVal;
 	}
 	return
 }
