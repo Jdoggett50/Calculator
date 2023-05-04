@@ -16,20 +16,22 @@ btns.addEventListener('click', evt => {
 
 //reads btnVal and returns inputs based on operator and opposing inputs
 function getInputs(btnVal){
-	// if(){
-
-	// }
-	if(getNums(btnVal) && operator && !getOperators(btnVal)){
-		console.log ('a');
-		return input2 += getOnlyNums(btnVal);
+	if(getOperator(btnVal) && input2){
+		console.log('b')
+		evaluator = getOperator(btnVal)
+		return evaluator
 	}
-	if(getOperators(btnVal) && input1){
-		console.log('b');
-		return operator = btnVal;
-	}
-	if (getNums(btnVal) && !operator){
+	if(getOperator(btnVal) && !input2){
 		console.log('c');
-		return input1 += getOnlyNums(btnVal);
+		return operator = getOperator(btnVal);
+	}
+	if(getNum(btnVal) && operator){
+		console.log ('d');
+		return input2 += getNum(btnVal);
+	}
+	if (getNum(btnVal) && !operator){
+		console.log('e');
+		return input1 += getNum(btnVal);
 	}
 	console.log('bad logic');
 	return '';
@@ -37,20 +39,20 @@ function getInputs(btnVal){
 
 //if btnVal is any operator, return the result if not, return undefined string
 function getResults(btnVal){
-	if (getOperators(btnVal) || btnVal == 'Enter'){
+	if (getOperator(btnVal) || btnVal == 'Enter'){
 		return operate(operator);
 	} 
 	return '';
 }
 
-function getOnlyNums(btnVal){
+function getNum(btnVal){
 	if(btnVal >= '0' || btnVal <= '9'){
 		return btnVal;
 	}
 	if((btnVal == '.' && input1.includes('.') && input2.includes('.'))){
 		return '';
 	}
-	return btnVal
+	return
 }
 //provides result based on whether an operator is present in the expression 
 function operate(op){
@@ -108,7 +110,7 @@ function eraseLast(input) {
 	return inputArray.join('')
 }
 
-function getOperators(btnVal){
+function getOperator(btnVal){
 	if (btnVal == '=' || btnVal == '+' || btnVal == '-' || btnVal == '*' || btnVal == '/'){
 		return btnVal
 	}
