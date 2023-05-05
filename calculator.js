@@ -1,8 +1,9 @@
+const operators = ['+','-','*','/']
 let input1 = '';
 let operator = '';
 let input2 = '';
 let evaluator = '';
-let result = '';
+// let result = '';
 
 const btns = document.querySelector('#selection-wrapper')
 const resultBox = document.querySelector('.result > p');
@@ -16,31 +17,37 @@ btns.addEventListener('click', evt => {
 
 //reads btnVal and returns inputs based on operator and opposing inputs
 function getInputs(btnVal){
-	if(getOperator(btnVal) && input2){
-		console.log('b')
-		evaluator = getOperator(btnVal)
-		return evaluator
+	// if(evaluator && operator){
+	// 	operator = evaluator;
+	// 	return operator;
+	// }
+	if(operators.includes(btnVal) && input2){
+		console.log('A')
+		evaluator = btnVal;
+		input1 = getResults(btnVal)
+		input2 = '';
+		return input1;
 	}
-	if(getOperator(btnVal) && !input2){
-		console.log('c');
-		return operator = getOperator(btnVal);
+	if(operators.includes(btnVal) && !input2){
+		console.log('B');
+		return operator = btnVal;
 	}
 	if(getNum(btnVal) && operator){
-		console.log ('d');
+		console.log ('C');
+		evaluator = '';
 		return input2 += getNum(btnVal);
 	}
 	if (getNum(btnVal) && !operator){
-		console.log('e');
+		console.log('D');
 		return input1 += getNum(btnVal);
 	}
-	console.log('bad logic');
 	return '';
 }
 
 //if btnVal is any operator, return the result if not, return undefined string
 function getResults(btnVal){
-	if (getOperator(btnVal) || btnVal == 'Enter'){
-		return operate(operator);
+	if (operators.includes(btnVal) || btnVal == 'Enter'){
+		return operate(btnVal);
 	} 
 	return '';
 }
@@ -108,11 +115,4 @@ function eraseLast(input) {
 	let inputArray = input.split('');
 	inputArray.pop()
 	return inputArray.join('')
-}
-
-function getOperator(btnVal){
-	if (btnVal == '=' || btnVal == '+' || btnVal == '-' || btnVal == '*' || btnVal == '/'){
-		return btnVal
-	}
-	return
 }
