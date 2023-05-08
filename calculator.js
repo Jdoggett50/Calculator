@@ -3,7 +3,7 @@ let input1 = '';
 let operator = '';
 let input2 = '';
 let evaluator = '';
-// let result = '';
+let result = '';
 
 const btns = document.querySelector('#selection-wrapper')
 const resultBox = document.querySelector('.result > p');
@@ -17,37 +17,30 @@ btns.addEventListener('click', evt => {
 
 //reads btnVal and returns inputs based on operator and opposing inputs
 function getInputs(btnVal){
-	// if(evaluator && operator){
-	// 	operator = evaluator;
-	// 	return operator;
-	// }
-	if(operators.includes(btnVal) && input2){
-		console.log('A')
-		evaluator = btnVal;
-		input1 = getResults(btnVal)
-		input2 = '';
-		return input1;
-	}
-	if(operators.includes(btnVal) && !input2){
+	//special cases:
+		//when evaluator exists, input1 needs to be equal to result
+	if(operators.includes(btnVal)){
+		//give a value to operator
 		console.log('B');
 		return operator = btnVal;
 	}
-	if(getNum(btnVal) && operator){
-		console.log ('C');
-		evaluator = '';
+	if(operator && getNum(btnVal)){
+		//give a value to input2
+		console.log('D');
 		return input2 += getNum(btnVal);
 	}
-	if (getNum(btnVal) && !operator){
-		console.log('D');
+	if (getNum(btnVal)){
+		//give a value to input1
+		console.log('E')
 		return input1 += getNum(btnVal);
 	}
 	return '';
 }
 
-//if btnVal is any operator, return the result if not, return undefined string
-function getResults(btnVal){
-	if (operators.includes(btnVal) || btnVal == 'Enter'){
-		return operate(btnVal);
+//if btnVal is any operator, return the result with btnVal as operator if not, return undefined string
+function getResults(){
+	if ((evaluator == '=' || evaluator == 'Enter') || (evaluator != '=' || evaluator != 'Enter')){
+		return operate(operator);
 	} 
 	return '';
 }
@@ -106,6 +99,7 @@ function clearSelection(btnVal){
 		input2 = '';
 		operator = '';
 		evaluator = '';
+		return result = '0';
 	}
 	return
 }
@@ -116,3 +110,19 @@ function eraseLast(input) {
 	inputArray.pop()
 	return inputArray.join('')
 }
+//first set of operands:
+// if there are no other inputs and an operator or evaluator is picked, return ''
+// input1 is true when the value is a number **
+// operator is true when the value is an operator from the list of operators **
+// input2 is true when input1 exists and the value isn't an operator or **
+// evaluator is true if input2 exists and the value is an operator
+// result is received when the evaluator is an operator or '='
+// input1 operator input2 evaluator result
+//	 1 		 + 		 1	      =        2
+
+//next set of operands:
+// input1 operator input2 evaluator result
+//	 2 		  		 	      =        
+// when there there IS a result, input1 is set to result
+// operator should then 
+// don't assign operator to '=' if it isn't an operator
