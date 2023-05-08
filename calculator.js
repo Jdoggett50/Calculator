@@ -17,8 +17,10 @@ btns.addEventListener('click', evt => {
 
 //reads btnVal and returns inputs based on operator and opposing inputs
 function getInputs(btnVal){
-	//special cases:
-		//when evaluator exists, input1 needs to be equal to result
+	if(btnVal == 'Enter' || btnVal == 'AC' || btnVal == '='){
+		console.log('A');
+		return '';
+	}
 	if(operators.includes(btnVal)){
 		//give a value to operator
 		console.log('B');
@@ -31,7 +33,7 @@ function getInputs(btnVal){
 	}
 	if (getNum(btnVal)){
 		//give a value to input1
-		console.log('E')
+		console.log('E');
 		return input1 += getNum(btnVal);
 	}
 	return '';
@@ -49,7 +51,7 @@ function getNum(btnVal){
 	if(btnVal >= '0' || btnVal <= '9'){
 		return btnVal;
 	}
-	if((btnVal == '.' && input1.includes('.') && input2.includes('.'))){
+	if(btnVal == '.' && input1.includes('.') && input2.includes('.')){
 		return '';
 	}
 	return
@@ -111,10 +113,11 @@ function eraseLast(input) {
 	return inputArray.join('')
 }
 //first set of operands:
-// if there are no other inputs and an operator or evaluator is picked, return ''
-// input1 is true when the value is a number **
-// operator is true when the value is an operator from the list of operators **
-// input2 is true when input1 exists and the value isn't an operator or **
+// *if btnVal is AC Enter or = return '' 
+// *if there are no other inputs and an operator or evaluator is picked, return ''
+// *input1 is true when the value is a number 
+// *operator is true when the value is an operator from the list of operators 
+// *input2 is true when input1 exists and the value isn't an operator
 // evaluator is true if input2 exists and the value is an operator
 // result is received when the evaluator is an operator or '='
 // input1 operator input2 evaluator result
