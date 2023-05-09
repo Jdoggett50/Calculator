@@ -21,7 +21,7 @@ function getInputs(btnVal){
 		console.log('A');
 		return clearSelection(btnVal);
 	}
-	if(evaluator && !input2){
+	if(evaluator && !input2 && evaluator != '='){
 		input2 += acceptedInputs(btnVal);
 		operand = evaluator;
 		evaluator = '';
@@ -50,6 +50,9 @@ function getInputs(btnVal){
 		console.log('F');
 		return input1 += acceptedInputs(btnVal);
 	}
+	if (!input2 && !operand && !input2){
+		return '';
+	}
 	return '';
 }
 
@@ -74,7 +77,7 @@ function divide (num1,num2) {
 //provides result based on whether an operator is present in the expression 
 function operate(op){
 	switch (op){
-		case "+":
+		case '+':
 			result = add(input1,input2);
 			break;
 		case '-':
@@ -88,14 +91,6 @@ function operate(op){
 	}
 	return result.toString();
 }
-
-// //if btnVal is any operator, return the result with btnVal as operator if not, return undefined string
-// function getResults(){
-// 	if (evaluator == '=' || evaluator == 'Enter' || (evaluator != '=' || evaluator != 'Enter')){
-// 		return operate(operand);
-// 	} 
-// 	return '';
-// }
 
 function acceptedInputs(btnVal){
 	if(btnVal == '.' && input1.includes('.') || btnVal == '.' && input2.includes('.')){
@@ -134,8 +129,8 @@ function eraseLast(input) {
 // *input1 is true when the value is a number 
 // *operator is true when the value is an operator from the list of operators 
 // *input2 is true when input1 exists and the value isn't an operator
-// evaluator is true if input2 exists and the value is an operator
-// result is received when the evaluator is an operator or '='
+// *evaluator is true if input2 exists and the value is an operator
+// *result is received when the evaluator is an operator or '='
 // input1 operator input2 evaluator result
 //	 1 		 + 		 1	      =        2
 
@@ -150,3 +145,5 @@ function eraseLast(input) {
 //result should either be assigned to the input 
 // (in the case of an operator and not equals) or (in the case of
 // enter and equals)
+
+// evaluator is = should not be an operand
