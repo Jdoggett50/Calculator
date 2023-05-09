@@ -1,6 +1,6 @@
 const operators = ['+','-','*','/']
 let input1 = '';
-let operator = '';
+let operand = '';
 let input2 = '';
 let evaluator = '';
 let result = '';
@@ -12,67 +12,38 @@ btns.addEventListener('click', evt => {
 	if (evt.target.classList.contains('button')){
 		resultBox.textContent = `${getInputs(evt.target.value)}`;
 	}
-	console.log(`input1: ${input1} operator: ${operator} input2: ${input2} evaluator: ${evaluator} result: ${getResults()}`);
+	console.log(`input1: ${input1} operand: ${operand} input2: ${input2} evaluator: ${evaluator} result: ${result}`);
 });
 
 //reads btnVal and returns inputs based on operator and opposing inputs
 function getInputs(btnVal){
-	if(btnVal == 'Enter' || btnVal == 'AC' || btnVal == '='){
+	if(btnVal == 'AC' || btnVal == 'BackSpace'){
 		console.log('A');
-		return '';
+		return clearSelection(btnVal);
+	}
+	if(operators.includes(btnVal) && input2){
+		console.log('B');
+		return evaluator = btnVal; 
+	}
+	if(evaluator == '=' || evaluator == 'Enter'){
+		console.log('C');
+		return result = operate(operand);
 	}
 	if(operators.includes(btnVal)){
-		//give a value to operator
-		console.log('B');
-		return operator = btnVal;
-	}
-	if(operator && getNum(btnVal)){
-		//give a value to input2
 		console.log('D');
-		return input2 += getNum(btnVal);
+		return operand = btnVal;
 	}
-	if (getNum(btnVal)){
-		//give a value to input1
+	if(operand && acceptedInputs(btnVal)){
 		console.log('E');
-		return input1 += getNum(btnVal);
+		return input2 += acceptedInputs(btnVal);
+	}
+	if (acceptedInputs(btnVal)){
+		console.log('F');
+		return input1 += acceptedInputs(btnVal);
 	}
 	return '';
 }
 
-//if btnVal is any operator, return the result with btnVal as operator if not, return undefined string
-function getResults(){
-	if ((evaluator == '=' || evaluator == 'Enter') || (evaluator != '=' || evaluator != 'Enter')){
-		return operate(operator);
-	} 
-	return '';
-}
-
-function getNum(btnVal){
-	if(btnVal >= '0' || btnVal <= '9'){
-		return btnVal;
-	}
-	if(btnVal == '.' && input1.includes('.') && input2.includes('.')){
-		return '';
-	}
-	return
-}
-//provides result based on whether an operator is present in the expression 
-function operate(op){
-	switch (op){
-		case "+":
-			result = add(input1,input2);
-			break;
-		case '-':
-			result = subtract(input1,input2);
-			break;
-		case '*':
-			result = multiply(input1,input2);
-			break;
-		case '/':
-			result = divide(input1,input2);
-	}
-	return result.toString();
-}
 //evaluating functions
 function add (num1, num2){
 	let result = parseFloat(num1) + parseFloat(num2);
@@ -91,6 +62,42 @@ function divide (num1,num2) {
 	return result.toFixed(2);
 }
 
+//provides result based on whether an operator is present in the expression 
+function operate(op){
+	switch (op){
+		case "+":
+			result = add(input1,input2);
+			break;
+		case '-':
+			result = subtract(input1,input2);
+			break;
+		case '*':
+			result = multiply(input1,input2);
+			break;
+		case '/':
+			result = divide(input1,input2);
+	}
+	return result.toString();
+}
+
+// //if btnVal is any operator, return the result with btnVal as operator if not, return undefined string
+// function getResults(){
+// 	if (evaluator == '=' || evaluator == 'Enter' || (evaluator != '=' || evaluator != 'Enter')){
+// 		return operate(operand);
+// 	} 
+// 	return '';
+// }
+
+function acceptedInputs(btnVal){
+	if(btnVal == '.' && input1.includes('.') || btnVal == '.' && input2.includes('.')){
+		return '';
+	}
+	if(btnVal >= '0' || btnVal <= '9'){
+		return btnVal;
+	}
+	return
+}
+
 //reads btnVals and executes eraseLast() when backspace is pressed
 function clearSelection(btnVal){
 	if(btnVal == 'BackSpace' ){
@@ -99,9 +106,9 @@ function clearSelection(btnVal){
 	if(btnVal == 'AC'){
 		input1 = '';
 		input2 = '';
-		operator = '';
+		operand = '';
 		evaluator = '';
-		return result = '0';
+		return result = '';
 	}
 	return
 }
@@ -109,11 +116,11 @@ function clearSelection(btnVal){
 //removes last value from input
 function eraseLast(input) {
 	let inputArray = input.split('');
-	inputArray.pop()
-	return inputArray.join('')
+	inputArray.pop();
+	return inputArray.join('');
 }
 //first set of operands:
-// *if btnVal is AC Enter or = return '' 
+// *if btnVal is backspace or AC - call clearSelection(btnVal)    
 // *if there are no other inputs and an operator or evaluator is picked, return ''
 // *input1 is true when the value is a number 
 // *operator is true when the value is an operator from the list of operators 
@@ -129,3 +136,8 @@ function eraseLast(input) {
 // when there there IS a result, input1 is set to result
 // operator should then 
 // don't assign operator to '=' if it isn't an operator
+
+//when the evaluator exists 
+//result should either be assigned to the input 
+// (in the case of an operator and not equals) or (in the case of
+// enter and equals)
