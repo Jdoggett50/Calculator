@@ -21,9 +21,18 @@ function getInputs(btnVal){
 		console.log('A');
 		return clearSelection(btnVal);
 	}
-	if(operators.includes(btnVal) && input2){
+	if(evaluator && !input2){
+		input2 += acceptedInputs(btnVal);
+		operand = evaluator;
+		evaluator = '';
+		return input2;
+	}
+	if(operators.includes(btnVal) && input2 || (btnVal == '=' || btnVal == 'Enter')){
 		console.log('B');
-		return evaluator = btnVal; 
+		evaluator = btnVal;
+		input1 = operate(operand);
+		input2 = '';
+		return input1;
 	}
 	if(evaluator == '=' || evaluator == 'Enter'){
 		console.log('C');
@@ -33,11 +42,11 @@ function getInputs(btnVal){
 		console.log('D');
 		return operand = btnVal;
 	}
-	if(operand && acceptedInputs(btnVal)){
+	if(operand && acceptedInputs(btnVal) && btnVal != '='){
 		console.log('E');
 		return input2 += acceptedInputs(btnVal);
 	}
-	if (acceptedInputs(btnVal)){
+	if(acceptedInputs(btnVal) && btnVal != '=' && !evaluator){
 		console.log('F');
 		return input1 += acceptedInputs(btnVal);
 	}
@@ -50,15 +59,15 @@ function add (num1, num2){
 	return result.toFixed(2);
 }
 function subtract (num1, num2) {
-    let result = parseFloat(num1) - parseFloat(num2)
+    let result = parseFloat(num1) - parseFloat(num2);
 	return result.toFixed(2);
 }
 function multiply (num1, num2) {
-    let result = parseFloat(num1) * parseFloat(num2)
+    let result = parseFloat(num1) * parseFloat(num2);
 	return result.toFixed(2);
 }
 function divide (num1,num2) {
-    let result = parseFloat(num1) / parseFloat(num2)
+    let result = parseFloat(num1) / parseFloat(num2);
 	return result.toFixed(2);
 }
 
