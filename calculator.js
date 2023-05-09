@@ -22,32 +22,36 @@ function getInputs(btnVal){
 		return clearSelection(btnVal);
 	}
 	if(evaluator && !input2 && evaluator != '='){
+		console.log('B');
 		input2 += acceptedInputs(btnVal);
 		operand = evaluator;
 		evaluator = '';
 		return input2;
 	}
+	if(evaluator && !input1 && !input2 && !operand){
+		return evaluator = '';
+	}
 	if(operators.includes(btnVal) && input2 || (btnVal == '=' || btnVal == 'Enter')){
-		console.log('B');
+		console.log('C');
 		evaluator = btnVal;
 		input1 = operate(operand);
 		input2 = '';
 		return input1;
 	}
 	if(evaluator == '=' || evaluator == 'Enter'){
-		console.log('C');
+		console.log('D');
 		return result = operate(operand);
 	}
 	if(operators.includes(btnVal)){
-		console.log('D');
+		console.log('E');
 		return operand = btnVal;
 	}
 	if(operand && acceptedInputs(btnVal) && btnVal != '='){
-		console.log('E');
+		console.log('F');
 		return input2 += acceptedInputs(btnVal);
 	}
 	if(acceptedInputs(btnVal) && btnVal != '=' && !evaluator){
-		console.log('F');
+		console.log('G');
 		return input1 += acceptedInputs(btnVal);
 	}
 	if (!input2 && !operand && !input2){
@@ -116,34 +120,18 @@ function clearSelection(btnVal){
 	}
 	return
 }
+//Only show decimals when the number of integers
+//is greater than 2. After that point, display decimals.
 
-//removes last value from input
+// place whole input inside of eraseLast(argument) when the 
+//below notes are true
 function eraseLast(input) {
 	let inputArray = input.split('');
 	inputArray.pop();
 	return inputArray.join('');
 }
-//first set of operands:
-// *if btnVal is backspace or AC - call clearSelection(btnVal)    
-// *if there are no other inputs and an operator or evaluator is picked, return ''
-// *input1 is true when the value is a number 
-// *operator is true when the value is an operator from the list of operators 
-// *input2 is true when input1 exists and the value isn't an operator
-// *evaluator is true if input2 exists and the value is an operator
-// *result is received when the evaluator is an operator or '='
-// input1 operator input2 evaluator result
-//	 1 		 + 		 1	      =        2
 
-//next set of operands:
-// input1 operator input2 evaluator result
-//	 2 		  		 	      =        
-// when there there IS a result, input1 is set to result
-// operator should then 
-// don't assign operator to '=' if it isn't an operator
-
-//when the evaluator exists 
-//result should either be assigned to the input 
-// (in the case of an operator and not equals) or (in the case of
-// enter and equals)
-
-// evaluator is = should not be an operand
+//how do we look at a particular input?
+// if operator exists, logically we are either finishing or editing input2 
+// if no operator exists logically we are in input2
+// if input1 exists and not input2 logically we are in operator 
