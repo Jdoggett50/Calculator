@@ -64,7 +64,7 @@ function getInputs(btnVal){
 	}
 	return '';
 }
-// ^ will take an operand and place next input to input 2's place
+// ^ if operand and evaluator is '=' locks in NaN state.
 
 //evaluating functions
 function add (num1, num2){
@@ -132,9 +132,12 @@ function checkDecimal(btnVal){
 }
 
 //reads btnVals and executes eraseLast() when backspace is pressed
-function clearSelection(btnVal){
-	if(btnVal == 'BackSpace' ){
-		return eraseLast(getInputs(btnVal))
+function clearSelection(btnVal){   
+	if(!operand && btnVal == 'BackSpace'){
+		return removeLast(input1)			
+	}
+	if(operand && btnVal == 'BackSpace'){
+		return removeLast(input2)
 	}
 	if(btnVal == 'AC'){
 		input1 = '';
@@ -145,15 +148,28 @@ function clearSelection(btnVal){
 	}
 	return
 }
-// place whole input inside of eraseLast(argument) when the 
-//below notes are true
-function eraseLast(input) {
+//last input is length of input -1.
+function removeLast(input) {
 	let inputArray = input.split('');
 	inputArray.pop();
 	return inputArray.join('');
 }
 
 //how do we look at a particular input?
-// if operator exists, logically we are either finishing or editing input2 
-// if no operator exists logically we are in input2
-// if input1 exists and not input2 logically we are in operator
+// if there is is no operator and backSpace is pressed
+// input1 is selected
+// pseudocode:
+//   if(!operand && btnVal == 'BackSpace'){
+//		return removeLast(input1)			
+//   }
+//   if(operand && btnVal == 'BackSpace'){
+//		return removeLast(input2)
+//   } 
+// when input is selected and index is removed,
+// return new input value
+// ex. before erasing input1, input1 = 2345 
+// after erasing once new input1 = 234. 
+// Erasing a second time would take new input1 
+// value i.e 234 and remove the next value.
+console.log(removeLast('hello world'))
+console.log(removeLast('hello worl'))
