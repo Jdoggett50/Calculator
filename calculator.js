@@ -63,19 +63,31 @@ function getInputs(btnVal){
 //evaluating functions
 function add (num1, num2){
 	let result = parseFloat(num1) + parseFloat(num2);
-	return result.toFixed(2);
+	if (num1.includes('.') || num2.includes('.')){
+		return result.toFixed(2)
+	}
+	return result;
 }
 function subtract (num1, num2) {
     let result = parseFloat(num1) - parseFloat(num2);
-	return result.toFixed(2);
+	if (num1.includes('.') || num2.includes('.')){
+		return result.toFixed(2)
+	}
+	return result;
 }
 function multiply (num1, num2) {
     let result = parseFloat(num1) * parseFloat(num2);
-	return result.toFixed(2);
+	if (num1.includes('.') || num2.includes('.')){
+		return result.toFixed(2)
+	}
+	return result;
 }
 function divide (num1,num2) {
     let result = parseFloat(num1) / parseFloat(num2);
-	return result.toFixed(2);
+	if (num1.includes('.') || num2.includes('.')){
+		return result.toFixed(2)
+	}
+	return result;
 }
 
 //provides result based on whether an operator is present in the expression 
@@ -120,8 +132,8 @@ function clearSelection(btnVal){
 	}
 	return
 }
-//Only show decimals when the number of integers
-//is greater than 2. After that point, display decimals.
+//if either integer contains a decimal point, result should
+// reflect two decimal places
 
 // place whole input inside of eraseLast(argument) when the 
 //below notes are true
@@ -134,4 +146,4 @@ function eraseLast(input) {
 //how do we look at a particular input?
 // if operator exists, logically we are either finishing or editing input2 
 // if no operator exists logically we are in input2
-// if input1 exists and not input2 logically we are in operator 
+// if input1 exists and not input2 logically we are in operator
