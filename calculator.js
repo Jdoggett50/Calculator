@@ -15,6 +15,11 @@ btns.addEventListener('click', evt => {
 	console.log(`input1: ${input1} operand: ${operand} input2: ${input2} evaluator: ${evaluator} result: ${result}`);
 });
 
+document.addEventListener('keydown', (evt) => {
+	//should accept numbers 0-9, operators, Enter and delete 
+	console.log(`input1: ${input1} operator: ${operand} input2: ${input2} evaluator: ${evaluator} result: ${getResults()}`);
+});
+
 //reads btnVal and returns inputs based on operator and opposing inputs
 function getInputs(btnVal){
 	if(btnVal == 'AC' || btnVal == 'BackSpace'){
@@ -23,7 +28,7 @@ function getInputs(btnVal){
 	}
 	if(evaluator && !input2 && evaluator != '='){
 		console.log('B');
-		input2 += acceptedInputs(btnVal);
+		input2 += checkDecimal(btnVal);
 		operand = evaluator;
 		evaluator = '';
 		return input2;
@@ -46,19 +51,20 @@ function getInputs(btnVal){
 		console.log('E');
 		return operand = btnVal;
 	}
-	if(operand && acceptedInputs(btnVal) && btnVal != '='){
+	if(operand && checkDecimal(btnVal) && btnVal != '='){
 		console.log('F');
-		return input2 += acceptedInputs(btnVal);
+		return input2 += checkDecimal(btnVal);
 	}
-	if(acceptedInputs(btnVal) && btnVal != '=' && !evaluator){
+	if(checkDecimal(btnVal) && btnVal != '=' && !evaluator){
 		console.log('G');
-		return input1 += acceptedInputs(btnVal);
+		return input1 += checkDecimal(btnVal);
 	}
-	if (!input2 && !operand && !input2){
+	if (!input1 && !operand && !input2){
 		return '';
 	}
 	return '';
 }
+// ^ will take an operand and place next input to input 2's place
 
 //evaluating functions
 function add (num1, num2){
@@ -108,11 +114,18 @@ function operate(op){
 	return result.toString();
 }
 
-function acceptedInputs(btnVal){
-	if(btnVal == '.' && input1.includes('.') || btnVal == '.' && input2.includes('.')){
+function getNums(btnVal){
+	if(btnVal >= '0' || btnVal <= '9'){
+		return btnVal;
+	}
+	return '';
+}
+
+function checkDecimal(btnVal){
+	if (btnVal == '.' && input2.includes('.') || btnVal == '.' && input1.includes('.')){
 		return '';
 	}
-	if(btnVal >= '0' || btnVal <= '9'){
+	if(getNums(btnVal)){
 		return btnVal;
 	}
 	return
@@ -132,9 +145,6 @@ function clearSelection(btnVal){
 	}
 	return
 }
-//if either integer contains a decimal point, result should
-// reflect two decimal places
-
 // place whole input inside of eraseLast(argument) when the 
 //below notes are true
 function eraseLast(input) {
