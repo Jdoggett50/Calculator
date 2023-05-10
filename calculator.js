@@ -122,13 +122,13 @@ function getNums(btnVal){
 }
 
 function checkDecimal(btnVal){
-	if (btnVal == '.' && input2.includes('.') || btnVal == '.' && input1.includes('.')){
-		return '';
-	}
-	if(getNums(btnVal)){
+	if(btnVal == '.' && !input1.includes('.') || btnVal == '.' && !input2.includes('.')){
 		return btnVal;
 	}
-	return
+	if (getNums(btnVal)){
+		return btnVal;
+	}
+	return '';
 }
 
 //reads btnVals and executes eraseLast() when backspace is pressed
