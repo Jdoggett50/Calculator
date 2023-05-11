@@ -26,25 +26,48 @@ document.addEventListener('keydown', (evt) => {
 });
 
 //reads btnVal and returns inputs based on operator and opposing inputs
+//when btnVal is Enter or = after result has been received,
+//result should display in resultBox I.e return result
 function getInputs(btnVal){
 	if(btnVal == 'AC' || btnVal == 'BackSpace'){
 		console.log('A');
 		return clearSelection(btnVal);
 	}
-	if(operators.includes(btnVal) && input2 || (btnVal == '=' || btnVal == 'Enter')){
-		console.log('E');
-		evaluator = btnVal;
-		input1 = operate(operand);
-		input2 = '';
-		return input1;
-	}
-	if(getNums(btnVal) && evaluator && !input2){
-		console.log('C');
-		input2 += checkDecimal(btnVal);
-		operand = evaluator;
+    if(input2 && btnVal == 'Enter'){
 		evaluator = '';
-		return input2;
+		return result
 	}
+	if(operators.includes(btnVal) && input2){
+		return evaluator = btnVal;
+	}
+	if(operators.includes(btnVal) && result){
+		return operand = evaluator;
+	}
+	if(result){
+		input1 = operate(operand);
+		result = '';
+		input2 = '';
+		operand = '';
+		return input1
+	}
+	// if(evaluator){
+	// 	input1 = result;
+	// 	operand = 
+	// }
+	// if(operators.includes(btnVal) && input2 || (btnVal == '=' || btnVal == 'Enter')){
+	// 	console.log('E');
+	// 	evaluator = btnVal;
+	// 	input1 = operate(operand);
+	// 	input2 = '';
+	// 	return input1;
+	// }
+	// if(getNums(btnVal) && evaluator && !input2){
+	// 	console.log('C');
+	// 	input2 += checkDecimal(btnVal);
+	// 	operand = evaluator;
+	// 	evaluator = '';
+	// 	return input2;
+	// }
 	if(getNums(btnVal) && evaluator && !input1 && !input2 && !operand){
 		console.log('D');
 		return evaluator = '';
@@ -63,9 +86,10 @@ function getInputs(btnVal){
 	}
 	return '';
 } 
-
+// if enter is hit, continue to display input1 until
+// another number is hit
 // operand cannot be equivalent to anything but operators
-//input1 cannot be equivaletn to anything but numbers
+// input1 cannot be equivalent to anything but numbers
 
 //evaluating functions
 function add (num1, num2){
