@@ -19,9 +19,6 @@ document.addEventListener('keydown', (evt) => {
 	if (acceptedKeys(evt.key) == 'Delete' || acceptedKeys(evt.key) == 'BackSpace'){
 		resultBox.textContent = `${clearSelection(evt.key)}`;
 	}
-    if (acceptedKeys(evt.key) == 'Enter' || acceptedKeys(evt.key) == '='){
-		resultBox.textContent = `${getInputs(evt.key)}`;
-	}
 	if (acceptedKeys(evt.key) == getNums(evt.key)){
 		resultBox.textContent = `${getInputs(evt.key)}`;
 	}
@@ -34,10 +31,12 @@ function getInputs(btnVal){
 		console.log('A');
 		return clearSelection(btnVal);
 	}
-	//shows result when = || Enter
-	if(evaluator == '=' || evaluator == 'Enter'){
-		console.log('B');
-		return result = input1
+	if(operators.includes(btnVal) && input2 || (btnVal == '=' || btnVal == 'Enter')){
+		console.log('E');
+		evaluator = btnVal;
+		input1 = operate(operand);
+		input2 = '';
+		return input1;
 	}
 	if(getNums(btnVal) && evaluator && !input2){
 		console.log('C');
@@ -49,13 +48,6 @@ function getInputs(btnVal){
 	if(getNums(btnVal) && evaluator && !input1 && !input2 && !operand){
 		console.log('D');
 		return evaluator = '';
-	}
-	if(operators.includes(btnVal) && input2 || (btnVal == '=' || btnVal == 'Enter')){
-		console.log('E');
-		evaluator = btnVal;
-		input1 = operate(operand);
-		input2 = '';
-		return input1;
 	}
 	if(operators.includes(btnVal)){
 		console.log('F');
@@ -70,9 +62,10 @@ function getInputs(btnVal){
 		return input1 += checkDecimal(btnVal);
 	}
 	return '';
-}
-// ^ if operand and evaluator is '=' locks in NaN state.
-// ^ when Enter || = is pressed 
+} 
+
+// operand cannot be equivalent to anything but operators
+//input1 cannot be equivaletn to anything but numbers
 
 //evaluating functions
 function add (num1, num2){
