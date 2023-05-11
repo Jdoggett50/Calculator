@@ -12,12 +12,20 @@ btns.addEventListener('click', evt => {
 	if (evt.target.classList.contains('button')){
 		resultBox.textContent = `${getInputs(evt.target.value)}`;
 	}
-	console.log(`input1: ${input1} operand: ${operand} input2: ${input2} evaluator: ${evaluator} result: ${result}`);
+	console.log(`input1: ${input1} operand: ${operand} input2: ${input2} evaluator: ${evaluator} result: ${operate(operand)}`);
 });
 
 document.addEventListener('keydown', (evt) => {
-	//should accept numbers 0-9, operators, Enter and delete 
-	console.log(`input1: ${input1} operator: ${operand} input2: ${input2} evaluator: ${evaluator} result: ${getResults()}`);
+	if (acceptedKeys(evt.key) == 'Delete' || acceptedKeys(evt.key) == 'BackSpace'){
+		resultBox.textContent = `${clearSelection(evt.key)}`;
+	}
+    if (acceptedKeys(evt.key) == 'Enter' || acceptedKeys(evt.key) == '='){
+		resultBox.textContent = `${getInputs(evt.key)}`;
+	}
+	if (acceptedKeys(evt.key) == getNums(evt.key)){
+		resultBox.textContent = `${getInputs(evt.key)}`;
+	}
+	console.log(`input1: ${input1} operator: ${operand} input2: ${input2} evaluator: ${evaluator} result: ${operate(operand)}`);
 });
 
 //reads btnVal and returns inputs based on operator and opposing inputs
@@ -26,45 +34,45 @@ function getInputs(btnVal){
 		console.log('A');
 		return clearSelection(btnVal);
 	}
-	if(evaluator && !input2 && evaluator != '='){
+	//shows result when = || Enter
+	if(evaluator == '=' || evaluator == 'Enter'){
 		console.log('B');
+		return result = input1
+	}
+	if(getNums(btnVal) && evaluator && !input2){
+		console.log('C');
 		input2 += checkDecimal(btnVal);
 		operand = evaluator;
 		evaluator = '';
 		return input2;
 	}
-	if(evaluator && !input1 && !input2 && !operand){
+	if(getNums(btnVal) && evaluator && !input1 && !input2 && !operand){
+		console.log('D');
 		return evaluator = '';
 	}
 	if(operators.includes(btnVal) && input2 || (btnVal == '=' || btnVal == 'Enter')){
-		console.log('C');
+		console.log('E');
 		evaluator = btnVal;
 		input1 = operate(operand);
 		input2 = '';
 		return input1;
 	}
-	if(evaluator == '=' || evaluator == 'Enter'){
-		console.log('D');
-		return result = operate(operand);
-	}
 	if(operators.includes(btnVal)){
-		console.log('E');
+		console.log('F');
 		return operand = btnVal;
 	}
 	if(operand && checkDecimal(btnVal) && btnVal != '='){
-		console.log('F');
+		console.log('G');
 		return input2 += checkDecimal(btnVal);
 	}
 	if(checkDecimal(btnVal) && btnVal != '=' && !evaluator){
-		console.log('G');
+		console.log('H');
 		return input1 += checkDecimal(btnVal);
-	}
-	if (!input1 && !operand && !input2){
-		return '';
 	}
 	return '';
 }
 // ^ if operand and evaluator is '=' locks in NaN state.
+// ^ when Enter || = is pressed 
 
 //evaluating functions
 function add (num1, num2){
@@ -114,6 +122,14 @@ function operate(op){
 	return result.toString();
 }
 
+function acceptedKeys (btnVal){
+	//if its an accepted key, return the key
+	if(btnVal == 'Enter' || btnVal == 'BackSpace' || btnVal == '=' || btnVal == 'Delete' || getNums(btnVal)){
+		return btnVal;
+	} 
+	return '' 
+}
+
 function getNums(btnVal){
 	if(btnVal >= '0' || btnVal <= '9'){
 		return btnVal;
@@ -134,10 +150,12 @@ function checkDecimal(btnVal){
 //reads btnVals and executes eraseLast() when backspace is pressed
 function clearSelection(btnVal){   
 	if(!operand && btnVal == 'BackSpace'){
-		return removeLast(input1)			
+		input1 = removeLastNum(input1)
+		return input1			
 	}
 	if(operand && btnVal == 'BackSpace'){
-		return removeLast(input2)
+		input2 = removeLastNum(input2)
+		return input2
 	}
 	if(btnVal == 'AC'){
 		input1 = '';
@@ -149,27 +167,8 @@ function clearSelection(btnVal){
 	return
 }
 //last input is length of input -1.
-function removeLast(input) {
+function removeLastNum(input) {
 	let inputArray = input.split('');
 	inputArray.pop();
 	return inputArray.join('');
 }
-
-//how do we look at a particular input?
-// if there is is no operator and backSpace is pressed
-// input1 is selected
-// pseudocode:
-//   if(!operand && btnVal == 'BackSpace'){
-//		return removeLast(input1)			
-//   }
-//   if(operand && btnVal == 'BackSpace'){
-//		return removeLast(input2)
-//   } 
-// when input is selected and index is removed,
-// return new input value
-// ex. before erasing input1, input1 = 2345 
-// after erasing once new input1 = 234. 
-// Erasing a second time would take new input1 
-// value i.e 234 and remove the next value.
-console.log(removeLast('hello world'))
-console.log(removeLast('hello worl'))
