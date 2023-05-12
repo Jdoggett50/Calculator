@@ -2,7 +2,7 @@ const operators = ['+','-','*','/']
 let input1 = '';
 let operand = '';
 let input2 = '';
-let evaluator = '';
+// let evaluator = ''; evaluator: ${evaluator}
 let result = '';
 
 const btns = document.querySelector('#selection-wrapper')
@@ -12,7 +12,7 @@ btns.addEventListener('click', evt => {
 	if (evt.target.classList.contains('button')){
 		resultBox.textContent = `${getInputs(evt.target.value)}`;
 	}
-	console.log(`input1: ${input1} operand: ${operand} input2: ${input2} evaluator: ${evaluator} result: ${operate(operand)}`);
+	console.log(`input1: ${input1} operand: ${operand} input2: ${input2} result: ${result}`);
 });
 
 document.addEventListener('keydown', (evt) => {
@@ -22,66 +22,30 @@ document.addEventListener('keydown', (evt) => {
 	if (acceptedKeys(evt.key) == getNums(evt.key)){
 		resultBox.textContent = `${getInputs(evt.key)}`;
 	}
-	console.log(`input1: ${input1} operator: ${operand} input2: ${input2} evaluator: ${evaluator} result: ${operate(operand)}`);
+	console.log(`input1: ${input1} operator: ${operand} input2: ${input2} result: ${operate(operand)}`);
 });
-
-//reads btnVal and returns inputs based on operator and opposing inputs
-//when btnVal is Enter or = after result has been received,
-//result should display in resultBox I.e return result
 function getInputs(btnVal){
 	if(btnVal == 'AC' || btnVal == 'BackSpace'){
 		console.log('A');
 		return clearSelection(btnVal);
-	}
-    if(input2 && btnVal == 'Enter'){
-		evaluator = '';
-		return result
-	}
-	if(operators.includes(btnVal) && input2){
-		return evaluator = btnVal;
-	}
-	if(operators.includes(btnVal) && result){
-		return operand = evaluator;
-	}
-	if(result){
-		input1 = operate(operand);
-		result = '';
-		input2 = '';
-		operand = '';
-		return input1
-	}
-	// if(evaluator){
-	// 	input1 = result;
-	// 	operand = 
-	// }
-	// if(operators.includes(btnVal) && input2 || (btnVal == '=' || btnVal == 'Enter')){
-	// 	console.log('E');
-	// 	evaluator = btnVal;
-	// 	input1 = operate(operand);
-	// 	input2 = '';
-	// 	return input1;
-	// }
-	// if(getNums(btnVal) && evaluator && !input2){
-	// 	console.log('C');
-	// 	input2 += checkDecimal(btnVal);
-	// 	operand = evaluator;
-	// 	evaluator = '';
-	// 	return input2;
-	// }
-	if(getNums(btnVal) && evaluator && !input1 && !input2 && !operand){
-		console.log('D');
-		return evaluator = '';
-	}
+	}  
 	if(operators.includes(btnVal)){
-		console.log('F');
+		console.log('B');
 		return operand = btnVal;
 	}
-	if(operand && checkDecimal(btnVal) && btnVal != '='){
-		console.log('G');
+	if(result){
+		input1 = result.toString();
+		result = '';
+		input2 = '';
+		operand = btnVal;
+		return operand;
+	}
+	if(operand && checkDecimal(btnVal)){
+		console.log('C');
 		return input2 += checkDecimal(btnVal);
 	}
-	if(checkDecimal(btnVal) && btnVal != '=' && !evaluator){
-		console.log('H');
+	if(checkDecimal(btnVal)){
+		console.log('D');
 		return input1 += checkDecimal(btnVal);
 	}
 	return '';
@@ -178,7 +142,6 @@ function clearSelection(btnVal){
 		input1 = '';
 		input2 = '';
 		operand = '';
-		evaluator = '';
 		return result = '';
 	}
 	return
