@@ -111,6 +111,8 @@ function acceptedKeys(btnVal){
 	} 
 	return '' 
 }
+
+console.log(acceptedKeys('.'))
 function getNums(btnVal){
 	if(btnVal >= 0 || btnVal <= 9){
 		return btnVal;
@@ -118,14 +120,13 @@ function getNums(btnVal){
 	return '';
 }
 
-// function checkDecimal(btnVal){
-// 	if (btnVal == '.' && input2.includes('.')){
-// 		return '';
-// 	} else if(btnVal == '.' && input1.includes('.')){
-// 		return '';
-// 	}  else
-// 	return btnVal;
-// }
+function checkDecimal(btnVal){
+	if(btnVal == '.' && !input1.includes('.') || btnVal == '.' && !input2.includes('.')){
+		return btnVal
+	} return ''
+	
+}
+
 //reads btnVals and executes eraseLast() when backspace is pressed
 function clearSelection(btnVal){   
 	if(!operand && btnVal == 'BackSpace'){
