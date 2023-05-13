@@ -16,12 +16,8 @@ btns.addEventListener('click', evt => {
 });
 
 document.addEventListener('keydown', (evt) => {
-	if (acceptedKeys(evt.key) == 'Delete' || acceptedKeys(evt.key) == 'BackSpace'){
-		resultBox.textContent = `${clearSelection(evt.key)}`;
-	}
-	if (acceptedKeys(evt.key) || operators.includes(evt.key)){
-		resultBox.textContent = `${getInputs(evt.key)}`;
-	}
+	console.log(checkDecimal(evt.key))
+	resultBox.textContent = getInputs(evt.key);
 	console.log(`input1: ${input1} operator: ${operand} input2: ${input2} result: ${operate(operand)}`);
 });
 
@@ -30,22 +26,29 @@ function getInputs(btnVal){
 		console.log('A');
 		return clearSelection(btnVal);
 	}  
-	if(operators.includes(btnVal)){
+	if(operand && operators.includes(btnVal)){
 		console.log('B');
-		return operand = btnVal;
+		operand = btnVal;
+		input2 = '';
+		input1 = result.toString();
+		return result;
 	}
-	if(btnVal == 'Enter' || btnVal == '='){
+	if(operators.includes(btnVal)){
 		console.log('C');
+		return operand = btnVal;
+	}	
+	if(btnVal == 'Enter' || btnVal == '='){
+		console.log('D');
 		input1 = result.toString();
 		return result
 	}
-	if(operand && getNums(btnVal)){
-		console.log('D');
-		return input2 += checkDecimal(btnVal);
+	if(operand && acceptedKeys(btnVal)){
+		console.log('E');
+		return input2 += acceptedKeys(btnVal);
 	}
-	if(getNums(btnVal)){
-		console.log('D');
-		return input1 += checkDecimal(btnVal);
+	if(acceptedKeys(btnVal)){
+		console.log('F');
+		return input1 += acceptedKeys(btnVal);
 	}
 	return '';
 } 
@@ -98,9 +101,9 @@ function operate(op){
 	return result.toString();
 }
 
-function acceptedKeys (btnVal){
+function acceptedKeys(btnVal){
 	//if its an accepted key, return the key
-	if(getNums(btnVal)){
+	if(getNums(btnVal) || checkDecimal(btnVal)){
 		return btnVal;
 	}
 	if(btnVal == 'Enter' || btnVal == 'BackSpace' || btnVal == '=' || btnVal == 'Delete'){
@@ -108,7 +111,6 @@ function acceptedKeys (btnVal){
 	} 
 	return '' 
 }
-
 function getNums(btnVal){
 	if(btnVal >= 0 || btnVal <= 9){
 		return btnVal;
@@ -116,16 +118,14 @@ function getNums(btnVal){
 	return '';
 }
 
-function checkDecimal(btnVal){
-	if(btnVal == '.' && !input1.includes('.') || btnVal == '.' && !input2.includes('.')){
-		return btnVal;
-	}
-	if (getNums(btnVal)){
-		return btnVal;
-	}
-	return '';
-}
-
+// function checkDecimal(btnVal){
+// 	if (btnVal == '.' && input2.includes('.')){
+// 		return '';
+// 	} else if(btnVal == '.' && input1.includes('.')){
+// 		return '';
+// 	}  else
+// 	return btnVal;
+// }
 //reads btnVals and executes eraseLast() when backspace is pressed
 function clearSelection(btnVal){   
 	if(!operand && btnVal == 'BackSpace'){
