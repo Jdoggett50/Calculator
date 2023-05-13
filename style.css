@@ -33,7 +33,7 @@
 	display: flex;
 }
 #numbers-container {
-	margin: 2% 2%
+	margin: 0% .5% .5% 1%;
 }
 #numbers-container :first-child{
 	background-color: #DEB887;
@@ -46,7 +46,7 @@
 	background-color: #FFEBCD;
 }
 #numbers-container > .button {
-	margin-top: 1%;
+	margin-top: .5%;
 	height: 24.5%;
 	width: 32%;
 }
@@ -56,9 +56,9 @@
 	min-width: 80%;
 }
 .operators {
-	margin: 3% 2% 1% 0;
+	margin: .5% 1% 1%;
 	width: 50%;
 	display: flex;
 	flex-direction: column;
-	gap: 1%;
+	gap: .5%;
 }
