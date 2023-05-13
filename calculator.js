@@ -19,11 +19,12 @@ document.addEventListener('keydown', (evt) => {
 	if (acceptedKeys(evt.key) == 'Delete' || acceptedKeys(evt.key) == 'BackSpace'){
 		resultBox.textContent = `${clearSelection(evt.key)}`;
 	}
-	if (acceptedKeys(evt.key) == getNums(evt.key)){
+	if (acceptedKeys(evt.key) || operators.includes(evt.key)){
 		resultBox.textContent = `${getInputs(evt.key)}`;
 	}
 	console.log(`input1: ${input1} operator: ${operand} input2: ${input2} result: ${operate(operand)}`);
 });
+
 function getInputs(btnVal){
 	if(btnVal == 'AC' || btnVal == 'BackSpace'){
 		console.log('A');
@@ -33,27 +34,21 @@ function getInputs(btnVal){
 		console.log('B');
 		return operand = btnVal;
 	}
-	if(result){
-		input1 = result.toString();
-		result = '';
-		input2 = '';
-		operand = btnVal;
-		return operand;
-	}
-	if(operand && checkDecimal(btnVal)){
+	if(btnVal == 'Enter' || btnVal == '='){
 		console.log('C');
+		input1 = result.toString();
+		return result
+	}
+	if(operand && getNums(btnVal)){
+		console.log('D');
 		return input2 += checkDecimal(btnVal);
 	}
-	if(checkDecimal(btnVal)){
+	if(getNums(btnVal)){
 		console.log('D');
 		return input1 += checkDecimal(btnVal);
 	}
 	return '';
 } 
-// if enter is hit, continue to display input1 until
-// another number is hit
-// operand cannot be equivalent to anything but operators
-// input1 cannot be equivalent to anything but numbers
 
 //evaluating functions
 function add (num1, num2){
@@ -105,16 +100,19 @@ function operate(op){
 
 function acceptedKeys (btnVal){
 	//if its an accepted key, return the key
-	if(btnVal == 'Enter' || btnVal == 'BackSpace' || btnVal == '=' || btnVal == 'Delete' || getNums(btnVal)){
+	if(getNums(btnVal)){
+		return btnVal;
+	}
+	if(btnVal == 'Enter' || btnVal == 'BackSpace' || btnVal == '=' || btnVal == 'Delete'){
 		return btnVal;
 	} 
 	return '' 
 }
 
 function getNums(btnVal){
-	if(btnVal >= '0' || btnVal <= '9'){
+	if(btnVal >= 0 || btnVal <= 9){
 		return btnVal;
-	}
+	} else 
 	return '';
 }
 
